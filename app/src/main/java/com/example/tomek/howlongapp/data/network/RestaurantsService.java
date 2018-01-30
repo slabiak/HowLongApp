@@ -1,19 +1,14 @@
 package com.example.tomek.howlongapp.data.network;
 
-import com.example.tomek.howlongapp.data.model.Restaurant;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
-import java.util.List;
+import com.example.tomek.howlongapp.data.model.ApiResponse;
 
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -22,20 +17,22 @@ import retrofit2.http.Query;
 
 public interface RestaurantsService {
 
-    String BASE_URL = "http://slabiaq.ayz.pl/crud/Api.php/";
+    String BASE_URL = "http://slabiaq.ayz.pl/";
 
-    @GET("users/{username}")
-    Call<List<Restaurant>> getRestaurants(@Query("apicall") String apicall);
+    @GET("crud/Api.php/")
+    Call<ApiResponse> getRestaurants(@Query("apicall") String apicall);
+
+    @FormUrlEncoded
+    @POST("crud/Api.php?apicall=getRestaurant")
+    Call<ApiResponse> getRestaurant(@Field("google_id") String google_id);
+
+    @FormUrlEncoded
+    @POST("crud/Api.php?apicall=createRestaurant")
+    Call<ApiResponse> createRestaurant(@Field("name") String name, @Field("wait_time") String wait_time, @Field("update_date") String update_date, @Field("google_id") String google_id);
 
 
     /******** Helper class that sets up a new services *******/
     class Creator {
-
-        JsonParser parser = new JsonParser();
-        JsonObject data = parser.parse(response).getAsJsonObject();
-        Meta meta = gson.fromJson(data.get("meta"), Meta.class);
-        Response myResponse = gson.fromJson(data.get("response"), Response.class);
-
 
 
         public static RestaurantsService newRestaurantsService() {

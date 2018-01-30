@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.example.tomek.howlongapp.R;
 import com.example.tomek.howlongapp.data.AppDataManager;
 
-public class MainActivity extends AppCompatActivity implements MainContract.View{
+public class MainActivity extends AppCompatActivity implements MainContract.View {
 
     MainContract.Presenter presenter;
     TextView textView;
@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     public void showText(String text) {
         textView.setText(text);
     }
-
 
 
 }

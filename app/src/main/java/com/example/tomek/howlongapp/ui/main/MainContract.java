@@ -19,6 +19,7 @@ public interface MainContract {
 
         void onAddButtonClicked();
 
+
     }
 
 }
