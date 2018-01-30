@@ -34,8 +34,6 @@ public class MainPresenter implements MainContract.Presenter {
         //getRestaurants();
         getRestaurant("ChIJ2V8bnRkx_UYROADo3AgiiL4");
         //createRestaurant();
-
-
     }
 
     public void getRestaurants() {
@@ -83,7 +81,6 @@ public class MainPresenter implements MainContract.Presenter {
 
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
-
             }
         }, "rest", "10", "11", "ddd");
     }
