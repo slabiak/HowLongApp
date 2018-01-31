@@ -48,7 +48,6 @@ public class MainPresenter implements MainContract.Presenter {
 
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
-
             }
         });
     }
