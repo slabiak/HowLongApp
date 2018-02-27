@@ -10,7 +10,9 @@ public class ApiResponse {
 
     private Boolean error;
     private String message;
+    private float mean;
     private List<Restaurant> restaurants = null;
+    private List<Report> reports;
 
     public Boolean getError() {
         return error;
@@ -36,4 +38,11 @@ public class ApiResponse {
         this.restaurants = restaurants;
     }
 
+    public float getMean() {
+        return mean;
+    }
+
+    public void setMean(float mean) {
+        this.mean = mean;
+    }
 }

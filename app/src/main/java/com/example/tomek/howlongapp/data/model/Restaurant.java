@@ -1,5 +1,7 @@
 package com.example.tomek.howlongapp.data.model;
 
+import java.util.List;
+
 /**
  * Created by Tomek on 27.01.2018.
  */
@@ -8,9 +10,10 @@ public class Restaurant {
 
     private Integer id;
     private String name;
-    private String waitTime;
-    private String updateDate;
+    private String address;
     private String googleId;
+    private List<Object> reports = null;
+    private Integer mean;
 
     public Integer getId() {
         return id;
@@ -28,20 +31,12 @@ public class Restaurant {
         this.name = name;
     }
 
-    public String getWaitTime() {
-        return waitTime;
+    public String getAddress() {
+        return address;
     }
 
-    public void setWaitTime(String waitTime) {
-        this.waitTime = waitTime;
-    }
-
-    public String getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(String updateDate) {
-        this.updateDate = updateDate;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getGoogleId() {
@@ -50,6 +45,22 @@ public class Restaurant {
 
     public void setGoogleId(String googleId) {
         this.googleId = googleId;
+    }
+
+    public List<Object> getReports() {
+        return reports;
+    }
+
+    public void setReports(List<Object> reports) {
+        this.reports = reports;
+    }
+
+    public Integer getMean() {
+        return mean;
+    }
+
+    public void setMean(Integer mean) {
+        this.mean = mean;
     }
 
 }
