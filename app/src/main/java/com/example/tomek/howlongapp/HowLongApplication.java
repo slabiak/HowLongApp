@@ -30,7 +30,7 @@ public class HowLongApplication extends Application {
         return (HowLongApplication) context.getApplicationContext();
     }
 
-    
+
 
     @Override
     public void onCreate() {
