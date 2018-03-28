@@ -17,19 +17,15 @@ import javax.inject.Inject;
 
 public class HowLongApplication extends Application {
 
-    @Inject RestaurantsService mRestaurantService;
-    @Inject AppDataManager mAppDataManager;
-
-
-
     protected ApplicationComponent applicationComponent;
-
-
+    @Inject
+    RestaurantsService mRestaurantService;
+    @Inject
+    AppDataManager mAppDataManager;
 
     public static HowLongApplication get(Context context) {
         return (HowLongApplication) context.getApplicationContext();
     }
-
 
 
     @Override
@@ -42,7 +38,7 @@ public class HowLongApplication extends Application {
         applicationComponent.inject(this);
     }
 
-    public ApplicationComponent getComponent(){
+    public ApplicationComponent getComponent() {
         return applicationComponent;
     }
 

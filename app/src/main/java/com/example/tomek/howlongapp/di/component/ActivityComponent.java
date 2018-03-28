@@ -24,6 +24,4 @@ public interface ActivityComponent {
     void inject(AddReportActivity addReportActivity);
 
 
-
-
 }

@@ -21,6 +21,7 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
 import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -31,15 +32,20 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     private final static int PLACE_PICKER_REQUEST = 999;
 
-    @Inject MainContract.Presenter mPresenter;
-    @Inject RestaurantsAdapter mRestaurantsAdapter;
+    @Inject
+    MainContract.Presenter mPresenter;
+    @Inject
+    RestaurantsAdapter mRestaurantsAdapter;
 
-    @BindView(R.id.restaurantsList) ListView mRestaurantsList;
-    @BindView(R.id.btn_add) Button mAddPlaceButton;
-    @BindView(R.id.searchView) SearchView mSearchView;
+    @BindView(R.id.restaurantsList)
+    ListView mRestaurantsList;
+    @BindView(R.id.btn_add)
+    Button mAddPlaceButton;
+    @BindView(R.id.searchView)
+    SearchView mSearchView;
 
     ProgressDialog mMessageDialog;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +66,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
                 intent.putExtra("id", listItem.getId().toString());
                 startActivity(intent);
             }
-    });
+        });
 
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -88,24 +94,24 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
-                    Place selectedplace = PlacePicker.getPlace(this, data);
-                    mPresenter.onPlacePickerFinished(selectedplace);
-                } else {
-                    Toast.makeText(this, "Coś poszło nie tak!", Toast.LENGTH_LONG).show();
-                }
+                Place selectedplace = PlacePicker.getPlace(this, data);
+                mPresenter.onPlacePickerFinished(selectedplace);
+            } else {
+                Toast.makeText(this, "Coś poszło nie tak!", Toast.LENGTH_LONG).show();
             }
         }
+    }
 
     @Override
-    public void showMessage(String text){
+    public void showMessage(String text) {
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showLoadingProgress(boolean active) {
-        if(active) {
+        if (active) {
             mMessageDialog = ProgressDialog.show(this, "Proszę czekać...", "Pobieram dane...", true);
-        }else {
+        } else {
             mMessageDialog.dismiss();
         }
     }

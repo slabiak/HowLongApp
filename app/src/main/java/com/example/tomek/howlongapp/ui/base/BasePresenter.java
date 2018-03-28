@@ -4,7 +4,7 @@ package com.example.tomek.howlongapp.ui.base;
  * Created by tslabiak on 15.03.2018.
  */
 
- public class BasePresenter<T extends MvpView> implements Presenter<T> {
+public class BasePresenter<T extends MvpView> implements Presenter<T> {
 
     private T mMvpView;
 
@@ -21,8 +21,6 @@ package com.example.tomek.howlongapp.ui.base;
     public T getMvpView() {
         return mMvpView;
     }
-
-
 
 
 }

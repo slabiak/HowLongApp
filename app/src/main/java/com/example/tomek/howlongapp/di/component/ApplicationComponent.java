@@ -31,6 +31,8 @@ public interface ApplicationComponent {
     Context getContext();
 
     AppDataManager getAppDataManager();
+
     RestaurantsService getRestaurantService();
+
     PlacesService getPlacesService();
 }

@@ -1,8 +1,6 @@
 package com.example.tomek.howlongapp.ui.restaurantdetail.adapter;
 
 import android.content.Context;
-import android.media.Image;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tomek.howlongapp.R;
-import com.example.tomek.howlongapp.data.AppDataManager;
 import com.example.tomek.howlongapp.data.model.Report;
-import com.example.tomek.howlongapp.data.model.Restaurant;
-import com.squareup.picasso.Picasso;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +49,7 @@ public class ReportsAdapter extends ArrayAdapter<Report> {
         String time = report.getCreatedAt().split(" ")[1].toString();
         createdAt.setText(time);
 
-        waitingTime.setText(Integer.toString(report.getWaitingTime())+ " min");
+        waitingTime.setText(Integer.toString(report.getWaitingTime()) + " min");
         return convertView;
     }
 

@@ -1,7 +1,5 @@
 package com.example.tomek.howlongapp.util.schedulers;
 
-import android.support.annotation.NonNull;
-
 import io.reactivex.Scheduler;
 
 /**
@@ -10,7 +8,9 @@ import io.reactivex.Scheduler;
 public interface BaseSchedulerProvider {
 
     Scheduler computation();
+
     Scheduler io();
+
     Scheduler ui();
 
 }

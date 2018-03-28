@@ -1,7 +1,5 @@
 package com.example.tomek.howlongapp.data.model;
 
-import com.example.tomek.howlongapp.BuildConfig;
-
 import java.util.List;
 
 /**

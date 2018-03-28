@@ -1,6 +1,5 @@
 package com.example.tomek.howlongapp.util.schedulers;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import io.reactivex.Scheduler;

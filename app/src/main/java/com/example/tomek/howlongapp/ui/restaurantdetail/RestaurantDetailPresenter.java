@@ -13,8 +13,8 @@ import javax.inject.Inject;
 
 public class RestaurantDetailPresenter extends BasePresenter<RestaurantDetailContract.View> implements RestaurantDetailContract.Presenter {
 
-    private Integer ID;
     AppDataManager mAppDataManager;
+    private Integer ID;
 
     @Inject
     public RestaurantDetailPresenter(AppDataManager appDataManager) {
@@ -24,15 +24,10 @@ public class RestaurantDetailPresenter extends BasePresenter<RestaurantDetailCon
     @Override
     public void start() {
         String reference = findReastaurant(ID).getPhotoReference();
-        String url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference=" +reference +"&key=" + BuildConfig.GoogleSecAPIKEY;
+        String url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference=" + reference + "&key=" + BuildConfig.GoogleSecAPIKEY;
         getMvpView().loadImage(url);
         getMvpView().showReports(findReastaurant(ID).getReports());
-        getMvpView().showRetaurantsDetails(findReastaurant(ID).getName(),findReastaurant(ID).getAddress(), findReastaurant(ID).getReports().size(),findReastaurant(ID).getMean());
-    }
-
-    @Override
-    public void setID(Integer ID) {
-        this.ID = ID;
+        getMvpView().showRetaurantsDetails(findReastaurant(ID).getName(), findReastaurant(ID).getAddress(), findReastaurant(ID).getReports().size(), findReastaurant(ID).getMean());
     }
 
     @Override
@@ -41,13 +36,18 @@ public class RestaurantDetailPresenter extends BasePresenter<RestaurantDetailCon
     }
 
     @Override
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
+
+    @Override
     public void onAddButtonClicked() {
         getMvpView().startAddReportActivity();
     }
 
     Restaurant findReastaurant(Integer ID) {
-        for(Restaurant restaurant : mAppDataManager.getmLocalResponse().getRestaurants()) {
-            if(restaurant.getId() == ID) {
+        for (Restaurant restaurant : mAppDataManager.getmLocalResponse().getRestaurants()) {
+            if (restaurant.getId() == ID) {
                 return restaurant;
             }
         }

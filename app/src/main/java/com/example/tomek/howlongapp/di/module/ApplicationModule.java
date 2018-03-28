@@ -8,13 +8,10 @@ import com.example.tomek.howlongapp.data.network.RestaurantsService;
 import com.example.tomek.howlongapp.di.ApplicationContext;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
-import java.util.concurrent.TimeUnit;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -25,9 +22,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class ApplicationModule {
 
-    String BASE_URL = "http://slabiaq.ayz.pl/";
-
     protected final Application mApplication;
+    String BASE_URL = "http://slabiaq.ayz.pl/";
 
     public ApplicationModule(Application application) {
         mApplication = application;

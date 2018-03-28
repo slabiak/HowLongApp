@@ -67,7 +67,7 @@ public class Restaurant implements Comparable {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.name;
     }
 
@@ -75,7 +75,7 @@ public class Restaurant implements Comparable {
     public int compareTo(@NonNull Object o) {
         Restaurant restaurant = (Restaurant) o;
         int cmp = Double.compare(((Restaurant) o).getMean(), this.mean);
-        return  cmp;
+        return cmp;
     }
 
     public String getPhotoReference() {

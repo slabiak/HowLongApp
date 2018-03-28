@@ -1,14 +1,10 @@
 package com.example.tomek.howlongapp.data;
 
-import android.os.Build;
-
 import com.example.tomek.howlongapp.BuildConfig;
 import com.example.tomek.howlongapp.data.model.ApiResponse;
 import com.example.tomek.howlongapp.data.network.PlacesService;
 import com.example.tomek.howlongapp.data.network.RestaurantsService;
 import com.google.gson.JsonObject;
-
-import org.json.JSONObject;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -27,7 +23,8 @@ public class AppDataManager {
     RestaurantsService mRestaurantService;
     PlacesService placesService;
     ApiResponse mLocalResponse;
-//    TODO make cahing function
+
+    //    TODO make cahing function
     @Inject
     public AppDataManager(RestaurantsService mRestaurantService, PlacesService placesService) {
         this.mRestaurantService = mRestaurantService;
@@ -42,11 +39,11 @@ public class AppDataManager {
         return mRestaurantService.addReport(restaurant_id, wait_time, created_by);
     }
 
-    public Observable<ApiResponse> getRR(){
+    public Observable<ApiResponse> getRR() {
         return mRestaurantService.getRR();
     }
 
-    public Observable<JsonObject> getPlaceDetails(String google_id){
+    public Observable<JsonObject> getPlaceDetails(String google_id) {
         return placesService.getPlaceJson(BuildConfig.GoogleSecAPIKEY, google_id);
     }
 

@@ -28,14 +28,19 @@ import io.reactivex.disposables.Disposable;
 public class MainPresenter extends BasePresenter<MainContract.View> implements MainContract.Presenter {
 
     private static final String TAG = "MyActivity";
-    private AppDataManager mAppDataManager;
     private final BaseSchedulerProvider mBaseSchedulerProvider;
-    private ApiResponse mApiResponseCached;
     public Subscription mSubscription;
+    private AppDataManager mAppDataManager;
+    private ApiResponse mApiResponseCached;
 
     public MainPresenter(AppDataManager appDataManager, BaseSchedulerProvider baseSchedulerProvider) {
         mAppDataManager = appDataManager;
         mBaseSchedulerProvider = baseSchedulerProvider;
+    }
+
+    public static boolean empty(final String s) {
+        // Null-safe, short-circuit evaluation.
+        return s == null || s.trim().isEmpty();
     }
 
     @Override
@@ -67,39 +72,39 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     public void createRestaurant(String name, String address, String googleID, String imageURL) {
 
-    if (!(empty(name) || empty(address) || empty(googleID) || empty(imageURL))) {
-        mAppDataManager.createRestaurant(name, address, googleID, imageURL)
-                .subscribeOn(mBaseSchedulerProvider.io())
-                .observeOn(mBaseSchedulerProvider.ui())
-                .subscribe(new Observer<ApiResponse>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                    }
-
-                    @Override
-                    public void onNext(ApiResponse apiResponse) {
-                        if (apiResponse.getError() == false) {
-                            mAppDataManager.setmLocalResponse(apiResponse);
-                            List<Restaurant> list = apiResponse.getRestaurants();
-                            Collections.sort(list);
-                            getMvpView().showRestaurants(list);
-                            getMvpView().showMessage("Restauracja dodana pomyślnie!");
-                        } else {
-                            getMvpView().showMessage("Wybrana restauracja jest już w bazie!");
+        if (!(empty(name) || empty(address) || empty(googleID) || empty(imageURL))) {
+            mAppDataManager.createRestaurant(name, address, googleID, imageURL)
+                    .subscribeOn(mBaseSchedulerProvider.io())
+                    .observeOn(mBaseSchedulerProvider.ui())
+                    .subscribe(new Observer<ApiResponse>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
                         }
-                    }
 
-                    @Override
-                    public void onError(Throwable e) {
-                    }
+                        @Override
+                        public void onNext(ApiResponse apiResponse) {
+                            if (apiResponse.getError() == false) {
+                                mAppDataManager.setmLocalResponse(apiResponse);
+                                List<Restaurant> list = apiResponse.getRestaurants();
+                                Collections.sort(list);
+                                getMvpView().showRestaurants(list);
+                                getMvpView().showMessage("Restauracja dodana pomyślnie!");
+                            } else {
+                                getMvpView().showMessage("Wybrana restauracja jest już w bazie!");
+                            }
+                        }
 
-                    @Override
-                    public void onComplete() {
-                    }
-                });
-    } else {
-        getMvpView().showMessage("Błąd! Restauracja nie ma kompletnych danych");
-    }
+                        @Override
+                        public void onError(Throwable e) {
+                        }
+
+                        @Override
+                        public void onComplete() {
+                        }
+                    });
+        } else {
+            getMvpView().showMessage("Błąd! Restauracja nie ma kompletnych danych");
+        }
     }
 
     public void loadRestaurants() {
@@ -173,11 +178,6 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                     public void onComplete() {
                     }
                 });
-    }
-
-    public static boolean empty( final String s ) {
-        // Null-safe, short-circuit evaluation.
-        return s == null || s.trim().isEmpty();
     }
 
 }

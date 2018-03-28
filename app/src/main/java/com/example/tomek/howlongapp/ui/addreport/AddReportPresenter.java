@@ -36,18 +36,14 @@ public class AddReportPresenter extends BasePresenter<AddReportContract.View> im
         addReport(ID, waitingTime, author);
     }
 
+    public Integer getID() {
+        return ID;
+    }
 
     @Override
     public void setID(Integer ID) {
         this.ID = ID;
     }
-
-
-    public Integer getID() {
-        return ID;
-    }
-
-
 
     public void addReport(Integer id, Integer waitingTime, String createdBy) {
         mAppDataManager.addReport(id, waitingTime, createdBy)

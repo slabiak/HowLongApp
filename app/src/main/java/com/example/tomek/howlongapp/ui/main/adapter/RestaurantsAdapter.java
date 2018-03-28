@@ -24,7 +24,7 @@ import javax.inject.Inject;
  * Created by tslabiak on 03.03.2018.
  */
 
-public class RestaurantsAdapter extends ArrayAdapter<Restaurant> implements Filterable{
+public class RestaurantsAdapter extends ArrayAdapter<Restaurant> implements Filterable {
 
 
     private List<Restaurant> mRestaurants = new ArrayList<Restaurant>();
@@ -52,7 +52,7 @@ public class RestaurantsAdapter extends ArrayAdapter<Restaurant> implements Filt
         TextView wait_time = convertView.findViewById(R.id.wait_time);
         // Populate the data into the template view using the data object
         String reference = restaurant.getPhotoReference();
-        String url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference=" +reference +"&key=" + BuildConfig.GoogleSecAPIKEY.toString();
+        String url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference=" + reference + "&key=" + BuildConfig.GoogleSecAPIKEY.toString();
         Picasso.get().load(url).into(image);
         name.setText(restaurant.getName());
         address.setText(restaurant.getAddress());
@@ -103,7 +103,7 @@ public class RestaurantsAdapter extends ArrayAdapter<Restaurant> implements Filt
             int count = list.size();
             final ArrayList<Restaurant> nlist = new ArrayList<Restaurant>(count);
 
-            Restaurant filterableRestaurant ;
+            Restaurant filterableRestaurant;
 
             for (int i = 0; i < count; i++) {
                 filterableRestaurant = list.get(i);
@@ -126,9 +126,6 @@ public class RestaurantsAdapter extends ArrayAdapter<Restaurant> implements Filt
         }
 
     }
-
-
-
 
 
 }
