@@ -1,19 +1,22 @@
 package com.example.tomek.howlongapp.data.model;
 
+import android.support.annotation.NonNull;
+
 import java.util.List;
 
 /**
  * Created by Tomek on 27.01.2018.
  */
 
-public class Restaurant {
+public class Restaurant implements Comparable {
 
     private Integer id;
     private String name;
     private String address;
     private String googleId;
-    private List<Object> reports = null;
+    private List<Report> reports;
     private Integer mean;
+    private String photo_reference;
 
     public Integer getId() {
         return id;
@@ -47,11 +50,11 @@ public class Restaurant {
         this.googleId = googleId;
     }
 
-    public List<Object> getReports() {
+    public List<Report> getReports() {
         return reports;
     }
 
-    public void setReports(List<Object> reports) {
+    public void setReports(List<Report> reports) {
         this.reports = reports;
     }
 
@@ -63,4 +66,23 @@ public class Restaurant {
         this.mean = mean;
     }
 
+    @Override
+    public String toString(){
+        return this.name;
+    }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        Restaurant restaurant = (Restaurant) o;
+        int cmp = Double.compare(((Restaurant) o).getMean(), this.mean);
+        return  cmp;
+    }
+
+    public String getPhotoReference() {
+        return photo_reference;
+    }
+
+    public void setPhotoReference(String photo_reference) {
+        this.photo_reference = photo_reference;
+    }
 }

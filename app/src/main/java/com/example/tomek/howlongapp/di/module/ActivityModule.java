@@ -4,14 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.example.tomek.howlongapp.data.AppDataManager;
-import com.example.tomek.howlongapp.di.ActivityContext;
-import com.example.tomek.howlongapp.di.ApplicationContext;
-import com.example.tomek.howlongapp.di.PerActivity;
-import com.example.tomek.howlongapp.ui.main.MainActivity;
+import com.example.tomek.howlongapp.ui.addreport.AddReportContract;
+import com.example.tomek.howlongapp.ui.addreport.AddReportPresenter;
 import com.example.tomek.howlongapp.ui.main.MainContract;
 import com.example.tomek.howlongapp.ui.main.MainPresenter;
-
-import javax.inject.Inject;
+import com.example.tomek.howlongapp.ui.restaurantdetail.RestaurantDetailContract;
+import com.example.tomek.howlongapp.ui.restaurantdetail.RestaurantDetailPresenter;
+import com.example.tomek.howlongapp.ui.restaurantdetail.adapter.ReportsAdapter;
+import com.example.tomek.howlongapp.util.schedulers.BaseSchedulerProvider;
+import com.example.tomek.howlongapp.util.schedulers.SchedulerProvider;
 
 import dagger.Module;
 import dagger.Provides;
@@ -24,13 +25,12 @@ import dagger.Provides;
 public class ActivityModule {
 
     private Activity mActivity;
-    private MainContract.View mView;
 
-    public ActivityModule(Activity activity, MainContract.View view) {
+
+
+    public ActivityModule(Activity activity) {
         mActivity = activity;
-        mView = view;
     }
-
 
 
     @Provides
@@ -39,21 +39,22 @@ public class ActivityModule {
     }
 
     @Provides
-    @PerActivity
-    MainContract.View provideView(){
-        return mView;
-    }
-
-    @Provides
-    @ActivityContext
-    Context provideContext() {
+    Context providesContext() {
         return mActivity;
     }
 
     @Provides
-    MainContract.Presenter providePresenter(MainContract.View mainView, AppDataManager appDataManager) {
-        return new MainPresenter(mainView,appDataManager);
+    MainContract.Presenter provideMainPresenter(AppDataManager appDataManager){
+        return new MainPresenter(appDataManager, SchedulerProvider.getInstance());
     }
 
+    @Provides
+    AddReportContract.Presenter provideAddReportPresenter(AppDataManager appDataManager){
+        return new AddReportPresenter(appDataManager);
+    }
 
+    @Provides
+    RestaurantDetailContract.Presenter provideRestaurantDetailPresenter(AppDataManager appDataManager){
+        return new RestaurantDetailPresenter(appDataManager);
+    }
 }

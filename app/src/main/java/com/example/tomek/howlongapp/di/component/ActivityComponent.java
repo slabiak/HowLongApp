@@ -1,15 +1,10 @@
 package com.example.tomek.howlongapp.di.component;
 
-import com.example.tomek.howlongapp.HowLongApplication;
-import com.example.tomek.howlongapp.di.ActivityContext;
 import com.example.tomek.howlongapp.di.PerActivity;
 import com.example.tomek.howlongapp.di.module.ActivityModule;
-import com.example.tomek.howlongapp.di.module.ApplicationModule;
+import com.example.tomek.howlongapp.ui.addreport.AddReportActivity;
 import com.example.tomek.howlongapp.ui.main.MainActivity;
-import com.example.tomek.howlongapp.ui.main.MainContract;
-import com.example.tomek.howlongapp.ui.main.MainPresenter;
-
-import javax.inject.Singleton;
+import com.example.tomek.howlongapp.ui.restaurantdetail.RestaurantDetailActivity;
 
 import dagger.Component;
 
@@ -24,6 +19,11 @@ public interface ActivityComponent {
 
     void inject(MainActivity mainActivity);
 
+    void inject(RestaurantDetailActivity restaurantDetailActivity);
 
-    MainContract.Presenter getPresenter();
+    void inject(AddReportActivity addReportActivity);
+
+
+
+
 }

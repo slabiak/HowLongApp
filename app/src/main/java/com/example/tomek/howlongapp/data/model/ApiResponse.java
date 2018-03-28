@@ -1,5 +1,7 @@
 package com.example.tomek.howlongapp.data.model;
 
+import com.example.tomek.howlongapp.BuildConfig;
+
 import java.util.List;
 
 /**
@@ -10,9 +12,7 @@ public class ApiResponse {
 
     private Boolean error;
     private String message;
-    private float mean;
-    private List<Restaurant> restaurants = null;
-    private List<Report> reports;
+    private List<Restaurant> restaurants;
 
     public Boolean getError() {
         return error;
@@ -38,11 +38,4 @@ public class ApiResponse {
         this.restaurants = restaurants;
     }
 
-    public float getMean() {
-        return mean;
-    }
-
-    public void setMean(float mean) {
-        this.mean = mean;
-    }
 }

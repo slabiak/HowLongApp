@@ -6,6 +6,7 @@ package com.example.tomek.howlongapp.data.model;
 
 public class Report {
 
+
     private Integer waitingTime;
     private String createdAt;
     private String createdBy;

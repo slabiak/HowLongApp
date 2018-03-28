@@ -3,13 +3,12 @@ package com.example.tomek.howlongapp.di.component;
 import android.app.Application;
 import android.content.Context;
 
-import com.example.tomek.howlongapp.BaseView;
 import com.example.tomek.howlongapp.HowLongApplication;
 import com.example.tomek.howlongapp.data.AppDataManager;
+import com.example.tomek.howlongapp.data.network.PlacesService;
 import com.example.tomek.howlongapp.data.network.RestaurantsService;
 import com.example.tomek.howlongapp.di.ApplicationContext;
 import com.example.tomek.howlongapp.di.module.ApplicationModule;
-import com.example.tomek.howlongapp.ui.main.MainActivity;
 
 import javax.inject.Singleton;
 
@@ -24,7 +23,6 @@ import dagger.Component;
 public interface ApplicationComponent {
 
     void inject(HowLongApplication howLongApplication);
-    //void inject(MainActivity mainActivity);
 
     @ApplicationContext
     Application getApplication();
@@ -34,5 +32,5 @@ public interface ApplicationComponent {
 
     AppDataManager getAppDataManager();
     RestaurantsService getRestaurantService();
-
+    PlacesService getPlacesService();
 }

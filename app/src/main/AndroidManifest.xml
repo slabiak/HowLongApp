@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tomek.howlongapp">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
-        android:allowBackup="true"
         android:name=".HowLongApplication"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -19,6 +19,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.addreport.AddReportActivity"
+            android:label="@string/title_activity_add_report"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.restaurantdetail.RestaurantDetailActivity" />
+        <activity android:name=".ui.base.BaseActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAKqGQIXcuZ4cXXiBrbOjD2Blz5SLYM5AQ" />
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+
     </application>
+
 
 </manifest>
