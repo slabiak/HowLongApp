@@ -4,6 +4,7 @@ import com.example.tomek.howlongapp.data.AppDataManager;
 import com.example.tomek.howlongapp.data.model.ApiResponse;
 import com.example.tomek.howlongapp.data.model.Restaurant;
 import com.example.tomek.howlongapp.ui.base.BasePresenter;
+import com.example.tomek.howlongapp.util.schedulers.BaseSchedulerProvider;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -19,10 +20,11 @@ public class AddReportPresenter extends BasePresenter<AddReportContract.View> im
 
     Integer ID;
     AppDataManager mAppDataManager;
+    private final BaseSchedulerProvider mBaseSchedulerProvider;
 
-
-    public AddReportPresenter(AppDataManager mAppDataManager) {
+    public AddReportPresenter(AppDataManager mAppDataManager, BaseSchedulerProvider baseSchedulerProvider) {
         this.mAppDataManager = mAppDataManager;
+        mBaseSchedulerProvider = baseSchedulerProvider;
     }
 
     @Override
@@ -47,8 +49,8 @@ public class AddReportPresenter extends BasePresenter<AddReportContract.View> im
 
     public void addReport(Integer id, Integer waitingTime, String createdBy) {
         mAppDataManager.addReport(id, waitingTime, createdBy)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(mBaseSchedulerProvider.io())
+                .observeOn(mBaseSchedulerProvider.ui())
                 .subscribe(new Observer<ApiResponse>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -72,7 +74,7 @@ public class AddReportPresenter extends BasePresenter<AddReportContract.View> im
 
     }
 
-    Restaurant findReastaurant(Integer ID) {
+    public Restaurant findReastaurant(Integer ID) {
 
         for (Restaurant restaurant : mAppDataManager.getmLocalResponse().getRestaurants()) {
             if (restaurant.getId() == ID) {

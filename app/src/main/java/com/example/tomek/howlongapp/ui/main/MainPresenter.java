@@ -45,7 +45,6 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     @Override
     public void start() {
-        Log.d("ddd", BuildConfig.GoogleSecAPIKEY);
         loadRestaurants();
     }
 
@@ -79,7 +78,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                     .subscribe(new Observer<ApiResponse>() {
                         @Override
                         public void onSubscribe(Disposable d) {
-                        }
+                                      }
 
                         @Override
                         public void onNext(ApiResponse apiResponse) {

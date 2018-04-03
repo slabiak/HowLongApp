@@ -10,6 +10,7 @@ import com.example.tomek.howlongapp.ui.main.MainContract;
 import com.example.tomek.howlongapp.ui.main.MainPresenter;
 import com.example.tomek.howlongapp.ui.restaurantdetail.RestaurantDetailContract;
 import com.example.tomek.howlongapp.ui.restaurantdetail.RestaurantDetailPresenter;
+import com.example.tomek.howlongapp.util.schedulers.ImmediateSchedulerProvider;
 import com.example.tomek.howlongapp.util.schedulers.SchedulerProvider;
 
 import dagger.Module;
@@ -47,11 +48,11 @@ public class ActivityModule {
 
     @Provides
     AddReportContract.Presenter provideAddReportPresenter(AppDataManager appDataManager) {
-        return new AddReportPresenter(appDataManager);
+        return new AddReportPresenter(appDataManager, SchedulerProvider.getInstance());
     }
 
     @Provides
     RestaurantDetailContract.Presenter provideRestaurantDetailPresenter(AppDataManager appDataManager) {
-        return new RestaurantDetailPresenter(appDataManager);
+        return new RestaurantDetailPresenter(appDataManager, SchedulerProvider.getInstance());
     }
 }

@@ -4,6 +4,7 @@ import com.example.tomek.howlongapp.BuildConfig;
 import com.example.tomek.howlongapp.data.AppDataManager;
 import com.example.tomek.howlongapp.data.model.Restaurant;
 import com.example.tomek.howlongapp.ui.base.BasePresenter;
+import com.example.tomek.howlongapp.util.schedulers.BaseSchedulerProvider;
 
 import javax.inject.Inject;
 
@@ -15,10 +16,12 @@ public class RestaurantDetailPresenter extends BasePresenter<RestaurantDetailCon
 
     AppDataManager mAppDataManager;
     private Integer ID;
+    private final BaseSchedulerProvider mBaseSchedulerProvider;
 
     @Inject
-    public RestaurantDetailPresenter(AppDataManager appDataManager) {
+    public RestaurantDetailPresenter(AppDataManager appDataManager,  BaseSchedulerProvider baseSchedulerProvider) {
         mAppDataManager = appDataManager;
+        mBaseSchedulerProvider = baseSchedulerProvider;
     }
 
     @Override
@@ -45,7 +48,7 @@ public class RestaurantDetailPresenter extends BasePresenter<RestaurantDetailCon
         getMvpView().startAddReportActivity();
     }
 
-    Restaurant findReastaurant(Integer ID) {
+    public Restaurant findReastaurant(Integer ID) {
         for (Restaurant restaurant : mAppDataManager.getmLocalResponse().getRestaurants()) {
             if (restaurant.getId() == ID) {
                 return restaurant;
