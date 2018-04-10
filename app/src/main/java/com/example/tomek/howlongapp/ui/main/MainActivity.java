@@ -1,4 +1,5 @@
 package com.example.tomek.howlongapp.ui.main;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
+
 import com.example.tomek.howlongapp.R;
 import com.example.tomek.howlongapp.data.model.Restaurant;
 import com.example.tomek.howlongapp.ui.base.BaseActivity;
@@ -17,28 +19,25 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+
 import java.util.List;
+
 import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements MainContract.View {
 
     private final static int PLACE_PICKER_REQUEST = 999;
+    private ProgressDialog mMessageDialog;
 
-    @Inject
-    MainContract.Presenter mPresenter;
-    @Inject
-    RestaurantsAdapter mRestaurantsAdapter;
+    @Inject MainContract.Presenter mPresenter;
+    @Inject RestaurantsAdapter mRestaurantsAdapter;
 
-    @BindView(R.id.restaurantsList)
-    ListView mRestaurantsList;
-    @BindView(R.id.btn_add)
-    Button mAddPlaceButton;
-    @BindView(R.id.searchView)
-    SearchView mSearchView;
-
-    ProgressDialog mMessageDialog;
+    @BindView(R.id.lv_restautants) ListView lvRestaurantsList;
+    @BindView(R.id.btn_addPlace) Button btnAddPlaceButton;
+    @BindView(R.id.sv_search) SearchView svSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,19 +49,19 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         mPresenter.start();
 
 
-        mRestaurantsList.setAdapter(mRestaurantsAdapter);
-        mRestaurantsList.setTextFilterEnabled(true);
-        mRestaurantsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvRestaurantsList.setAdapter(mRestaurantsAdapter);
+        lvRestaurantsList.setTextFilterEnabled(true);
+        lvRestaurantsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Restaurant listItem = (Restaurant) mRestaurantsList.getItemAtPosition(position);
+                Restaurant listItem = (Restaurant) lvRestaurantsList.getItemAtPosition(position);
                 Intent intent = new Intent(MainActivity.this, RestaurantDetailActivity.class);
                 intent.putExtra("id", listItem.getId().toString());
                 startActivity(intent);
             }
         });
 
-        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        svSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 mRestaurantsAdapter.getFilter().filter(query);
@@ -76,7 +75,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             }
         });
 
-        mAddPlaceButton.setOnClickListener(new View.OnClickListener() {
+        btnAddPlaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPresenter.onAddPlaceButtonClicked();
