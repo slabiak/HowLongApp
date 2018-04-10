@@ -40,10 +40,10 @@ public class ReportsAdapter extends ArrayAdapter<Report> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_report, parent, false);
         }
         // Lookup view for data population
-        TextView createdBy = convertView.findViewById(R.id.createdBy);
-        TextView createdAt = convertView.findViewById(R.id.createdAt);
-        TextView waitingTime = convertView.findViewById(R.id.waitingTime);
-        ImageView image2 = convertView.findViewById(R.id.imageView2);
+        TextView createdBy = convertView.findViewById(R.id.text_createdBy);
+        TextView createdAt = convertView.findViewById(R.id.text_createdAt);
+        TextView waitingTime = convertView.findViewById(R.id.text_waitingTime);
+        ImageView image2 = convertView.findViewById(R.id.image_thumbnail_detail);
         // Populate the data into the template view using the data object
         createdBy.setText(report.getCreatedBy());
         String time = report.getCreatedAt().split(" ")[1].toString();
@@ -62,6 +62,5 @@ public class ReportsAdapter extends ArrayAdapter<Report> {
         this.mReports = reports;
         this.addAll(reports);
     }
-
 
 }

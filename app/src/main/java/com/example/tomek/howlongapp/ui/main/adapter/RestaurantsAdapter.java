@@ -28,7 +28,7 @@ public class RestaurantsAdapter extends ArrayAdapter<Restaurant> implements Filt
 
 
     private List<Restaurant> mRestaurants = new ArrayList<Restaurant>();
-    private List<Restaurant> filteredRestaurants = new ArrayList<Restaurant>();
+    private List<Restaurant> mFilteredRestaurants = new ArrayList<Restaurant>();
     private ItemFilter mFilter = new ItemFilter();
 
     @Inject
@@ -46,10 +46,10 @@ public class RestaurantsAdapter extends ArrayAdapter<Restaurant> implements Filt
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_restaurant, parent, false);
         }
         // Lookup view for data population
-        ImageView image = convertView.findViewById(R.id.imageView);
-        TextView name = convertView.findViewById(R.id.restaurant_name);
-        TextView address = convertView.findViewById(R.id.address);
-        TextView wait_time = convertView.findViewById(R.id.wait_time);
+        ImageView image = convertView.findViewById(R.id.image_thumbnail_item);
+        TextView name = convertView.findViewById(R.id.text_name_item);
+        TextView address = convertView.findViewById(R.id.text_address_item);
+        TextView wait_time = convertView.findViewById(R.id.text_waiting_time_item);
         // Populate the data into the template view using the data object
         String reference = restaurant.getPhotoReference();
         String url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference=" + reference + "&key=" + BuildConfig.GoogleSecAPIKEY.toString();
@@ -63,11 +63,11 @@ public class RestaurantsAdapter extends ArrayAdapter<Restaurant> implements Filt
 
 
     public int getCount() {
-        return filteredRestaurants.size();
+        return mFilteredRestaurants.size();
     }
 
     public Restaurant getItem(int position) {
-        return filteredRestaurants.get(position);
+        return mFilteredRestaurants.get(position);
     }
 
     public long getItemId(int position) {
@@ -85,7 +85,7 @@ public class RestaurantsAdapter extends ArrayAdapter<Restaurant> implements Filt
 
     public void setmRestaurants(List<Restaurant> mRestaurants) {
         this.mRestaurants = mRestaurants;
-        this.filteredRestaurants = mRestaurants;
+        this.mFilteredRestaurants = mRestaurants;
         this.addAll(mRestaurants);
     }
 
@@ -121,7 +121,7 @@ public class RestaurantsAdapter extends ArrayAdapter<Restaurant> implements Filt
         @SuppressWarnings("unchecked")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            filteredRestaurants = (ArrayList<Restaurant>) results.values;
+            mFilteredRestaurants = (ArrayList<Restaurant>) results.values;
             notifyDataSetChanged();
         }
 

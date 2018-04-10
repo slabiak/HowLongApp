@@ -7,9 +7,7 @@ import com.example.tomek.howlongapp.ui.base.BasePresenter;
 import com.example.tomek.howlongapp.util.schedulers.BaseSchedulerProvider;
 
 import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by tslabiak on 04.03.2018.
@@ -18,8 +16,8 @@ import io.reactivex.schedulers.Schedulers;
 public class AddReportPresenter extends BasePresenter<AddReportContract.View> implements AddReportContract.Presenter {
 
 
-    Integer ID;
-    AppDataManager mAppDataManager;
+    private Integer ID;
+    private AppDataManager mAppDataManager;
     private final BaseSchedulerProvider mBaseSchedulerProvider;
 
     public AddReportPresenter(AppDataManager mAppDataManager, BaseSchedulerProvider baseSchedulerProvider) {
@@ -75,8 +73,7 @@ public class AddReportPresenter extends BasePresenter<AddReportContract.View> im
     }
 
     public Restaurant findReastaurant(Integer ID) {
-
-        for (Restaurant restaurant : mAppDataManager.getmLocalResponse().getRestaurants()) {
+        for (Restaurant restaurant : mAppDataManager.getLocalResponse().getRestaurants()) {
             if (restaurant.getId() == ID) {
                 return restaurant;
             }

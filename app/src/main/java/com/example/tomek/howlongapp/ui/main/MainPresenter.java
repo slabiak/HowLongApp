@@ -1,8 +1,5 @@
 package com.example.tomek.howlongapp.ui.main;
 
-import android.util.Log;
-
-import com.example.tomek.howlongapp.BuildConfig;
 import com.example.tomek.howlongapp.data.AppDataManager;
 import com.example.tomek.howlongapp.data.model.ApiResponse;
 import com.example.tomek.howlongapp.data.model.Restaurant;
@@ -83,7 +80,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                         @Override
                         public void onNext(ApiResponse apiResponse) {
                             if (apiResponse.getError() == false) {
-                                mAppDataManager.setmLocalResponse(apiResponse);
+                                mAppDataManager.setLocalResponse(apiResponse);
                                 List<Restaurant> list = apiResponse.getRestaurants();
                                 Collections.sort(list);
                                 getMvpView().showRestaurants(list);
@@ -120,7 +117,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                     @Override
                     public void onNext(ApiResponse apiResponse) {
                         if (apiResponse.getError() == false) {
-                            mAppDataManager.setmLocalResponse(apiResponse);
+                            mAppDataManager.setLocalResponse(apiResponse);
                             List<Restaurant> list = apiResponse.getRestaurants();
                             Collections.sort(list);
                             getMvpView().showRestaurants(list);

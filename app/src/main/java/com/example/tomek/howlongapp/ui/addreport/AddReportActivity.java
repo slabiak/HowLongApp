@@ -21,14 +21,10 @@ public class AddReportActivity extends BaseActivity implements AddReportContract
     @Inject
     AddReportContract.Presenter presenter;
 
-    @BindView(R.id.restaurantName)
-    TextView name;
-    @BindView(R.id.input_author)
-    EditText author;
-    @BindView(R.id.input_watingTime)
-    EditText waitingTime;
-    @BindView(R.id.add_report)
-    Button add_button;
+    @BindView(R.id.text_name) TextView tvName;
+    @BindView(R.id.input_author) EditText etAuthor;
+    @BindView(R.id.input_watingTime) EditText etWaitingTime;
+    @BindView(R.id.btn_addReport) Button btnAddReport;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,17 +37,17 @@ public class AddReportActivity extends BaseActivity implements AddReportContract
         presenter.setID(getID());
         presenter.start();
 
-        add_button.setOnClickListener(new View.OnClickListener() {
+        btnAddReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.onAddButtonClicked(author.getText().toString(), Integer.parseInt(waitingTime.getText().toString()));
+                presenter.onAddButtonClicked(etAuthor.getText().toString(), Integer.parseInt(etWaitingTime.getText().toString()));
             }
         });
     }
 
     @Override
     public void showRestaurantName(String name) {
-        this.name.setText(name);
+        this.tvName.setText(name);
     }
 
     @Override

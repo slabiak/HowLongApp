@@ -24,25 +24,16 @@ import butterknife.ButterKnife;
 
 public class RestaurantDetailActivity extends BaseActivity implements RestaurantDetailContract.View {
 
-    @Inject
-    RestaurantDetailContract.Presenter presenter;
-    @Inject
-    ReportsAdapter reportsAdapter;
+    @Inject RestaurantDetailContract.Presenter presenter;
+    @Inject ReportsAdapter reportsAdapter;
 
-    @BindView(R.id.address)
-    TextView text_address;
-    @BindView(R.id.meanTime)
-    TextView text_meanTime;
-    @BindView(R.id.reportsNumber)
-    TextView text_reportsNumber;
-    @BindView(R.id.name)
-    TextView text_name;
-    @BindView(R.id.reportsList)
-    ListView reportsListView;
-    @BindView(R.id.add_report)
-    Button btn_addReport;
-    @BindView(R.id.imageView2)
-    ImageView imageView;
+    @BindView(R.id.text_address) TextView tvAddress;
+    @BindView(R.id.text_mean) TextView tvMean;
+    @BindView(R.id.text_reports_number) TextView tvReportsNumber;
+    @BindView(R.id.text_name2) TextView tvName;
+    @BindView(R.id.list_reports) ListView lvReports;
+    @BindView(R.id.btn_addReport) Button btnAddReport;
+    @BindView(R.id.image_thumbnail_detail) ImageView imThumbnail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +48,9 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
         presenter.setID(getID());
         presenter.start();
 
-        reportsListView.setAdapter(reportsAdapter);
+        lvReports.setAdapter(reportsAdapter);
 
-        btn_addReport.setOnClickListener(new View.OnClickListener() {
+        btnAddReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 presenter.onAddButtonClicked();
@@ -75,10 +66,10 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
 
     @Override
     public void showRetaurantsDetails(String name, String address, Integer reportsNumber, Integer meanTime) {
-        text_name.setText(name);
-        text_address.setText(address);
-        text_reportsNumber.setText("Liczba raportów: " + reportsNumber.toString());
-        text_meanTime.setText("Średni czas: " + meanTime.toString());
+        tvName.setText(name);
+        tvAddress.setText(address);
+        tvReportsNumber.setText("Liczba raportów: " + reportsNumber.toString());
+        tvMean.setText("Średni czas: " + meanTime.toString());
     }
 
     @Override
@@ -90,6 +81,6 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
 
     @Override
     public void loadImage(String url) {
-        Picasso.get().load(url).into(imageView);
+        Picasso.get().load(url).into(imThumbnail);
     }
 }

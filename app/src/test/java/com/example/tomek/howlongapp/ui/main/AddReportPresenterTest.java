@@ -2,12 +2,9 @@ package com.example.tomek.howlongapp.ui.main;
 
 import com.example.tomek.howlongapp.data.AppDataManager;
 import com.example.tomek.howlongapp.data.model.ApiResponse;
-import com.example.tomek.howlongapp.data.model.Report;
 import com.example.tomek.howlongapp.data.model.Restaurant;
 import com.example.tomek.howlongapp.ui.addreport.AddReportContract;
 import com.example.tomek.howlongapp.ui.addreport.AddReportPresenter;
-import com.example.tomek.howlongapp.ui.restaurantdetail.RestaurantDetailContract;
-import com.example.tomek.howlongapp.ui.restaurantdetail.RestaurantDetailPresenter;
 import com.example.tomek.howlongapp.util.schedulers.BaseSchedulerProvider;
 import com.example.tomek.howlongapp.util.schedulers.ImmediateSchedulerProvider;
 
@@ -21,7 +18,6 @@ import java.util.ArrayList;
 
 import io.reactivex.Observable;
 
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
@@ -55,7 +51,7 @@ public class AddReportPresenterTest {
         list.add(restaurant);
         ApiResponse reponse = new ApiResponse();
         reponse.setRestaurants(list);
-        doReturn(reponse).when(mockAppDataManaer).getmLocalResponse();
+        doReturn(reponse).when(mockAppDataManaer).getLocalResponse();
         Restaurant restaurant2 = mPresenter.findReastaurant(1);
         Assert.assertEquals(restaurant, restaurant2);
     }

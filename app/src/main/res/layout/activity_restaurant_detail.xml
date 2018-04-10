@@ -18,7 +18,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/image_thumbnail_detail"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_marginStart="24dp"
@@ -29,7 +29,7 @@
                 app:srcCompat="@color/colorAccent" />
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/text_name2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -38,11 +38,11 @@
                 android:text="Mcdonalds's"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintStart_toEndOf="@+id/image_thumbnail_detail"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/address"
+                android:id="@+id/text_address"
                 android:layout_width="152dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -50,28 +50,28 @@
                 android:layout_weight="1"
                 android:text="Swiętojańks 63, Gdynia, Poland"
                 android:textStyle="italic"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
-                app:layout_constraintTop_toBottomOf="@+id/name" />
+                app:layout_constraintStart_toEndOf="@+id/image_thumbnail_detail"
+                app:layout_constraintTop_toBottomOf="@+id/text_name2" />
 
             <TextView
-                android:id="@+id/reportsNumber"
+                android:id="@+id/text_reports_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
                 android:text="Liczba raportów: 3"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
-                app:layout_constraintTop_toBottomOf="@+id/address" />
+                app:layout_constraintStart_toEndOf="@+id/image_thumbnail_detail"
+                app:layout_constraintTop_toBottomOf="@+id/text_address" />
 
             <TextView
-                android:id="@+id/meanTime"
+                android:id="@+id/text_mean"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="Sredni czas: 50"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
-                app:layout_constraintTop_toBottomOf="@+id/reportsNumber" />
+                app:layout_constraintStart_toEndOf="@+id/image_thumbnail_detail"
+                app:layout_constraintTop_toBottomOf="@+id/text_reports_number" />
         </android.support.constraint.ConstraintLayout>
 
         <LinearLayout android:id="@+id/header"
@@ -108,7 +108,7 @@
         </LinearLayout>
 
         <ListView
-            android:id="@+id/reportsList"
+            android:id="@+id/list_reports"
             android:layout_width="match_parent"
             android:layout_height="251dp" />
     </LinearLayout>
@@ -116,7 +116,7 @@
 
 
     <Button
-        android:id="@+id/add_report"
+        android:id="@+id/btn_addReport"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"

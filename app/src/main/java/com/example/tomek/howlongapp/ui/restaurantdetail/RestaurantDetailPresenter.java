@@ -49,7 +49,7 @@ public class RestaurantDetailPresenter extends BasePresenter<RestaurantDetailCon
     }
 
     public Restaurant findReastaurant(Integer ID) {
-        for (Restaurant restaurant : mAppDataManager.getmLocalResponse().getRestaurants()) {
+        for (Restaurant restaurant : mAppDataManager.getLocalResponse().getRestaurants()) {
             if (restaurant.getId() == ID) {
                 return restaurant;
             }

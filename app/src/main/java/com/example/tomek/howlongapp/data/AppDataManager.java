@@ -19,39 +19,37 @@ import io.reactivex.Observable;
 @Singleton
 public class AppDataManager {
 
-
-    RestaurantsService mRestaurantService;
-    PlacesService placesService;
+    private RestaurantsService mRestaurantService;
+    private PlacesService mPlacesService;
     ApiResponse mLocalResponse;
 
-    //    TODO make cahing function
     @Inject
     public AppDataManager(RestaurantsService mRestaurantService, PlacesService placesService) {
         this.mRestaurantService = mRestaurantService;
-        this.placesService = placesService;
+        this.mPlacesService = placesService;
     }
 
-    public Observable<ApiResponse> createRestaurant(String name, String address, String googleID, String imageURL) {
-        return mRestaurantService.createRestaurant(name, address, googleID, imageURL);
+    public Observable<ApiResponse> createRestaurant(String name, String address, String googleId, String photo_reference) {
+        return mRestaurantService.createRestaurant(name, address, googleId, photo_reference);
     }
 
-    public Observable<ApiResponse> addReport(Integer restaurant_id, Integer wait_time, String created_by) {
-        return mRestaurantService.addReport(restaurant_id, wait_time, created_by);
+    public Observable<ApiResponse> addReport(Integer id, Integer waitingTime, String createdBy) {
+        return mRestaurantService.addReport(id, waitingTime, createdBy);
     }
 
     public Observable<ApiResponse> getRR() {
         return mRestaurantService.getRR();
     }
 
-    public Observable<JsonObject> getPlaceDetails(String google_id) {
-        return placesService.getPlaceJson(BuildConfig.GoogleSecAPIKEY, google_id);
+    public Observable<JsonObject> getPlaceDetails(String googleId) {
+        return mPlacesService.getPlaceJson(BuildConfig.GoogleSecAPIKEY, googleId);
     }
 
-    public ApiResponse getmLocalResponse() {
+    public ApiResponse getLocalResponse() {
         return mLocalResponse;
     }
 
-    public void setmLocalResponse(ApiResponse localResponse) {
+    public void setLocalResponse(ApiResponse localResponse) {
         mLocalResponse = localResponse;
     }
 

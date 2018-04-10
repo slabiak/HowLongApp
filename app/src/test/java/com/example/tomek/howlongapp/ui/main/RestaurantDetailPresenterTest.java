@@ -8,7 +8,6 @@ import com.example.tomek.howlongapp.ui.restaurantdetail.RestaurantDetailContract
 import com.example.tomek.howlongapp.ui.restaurantdetail.RestaurantDetailPresenter;
 import com.example.tomek.howlongapp.util.schedulers.BaseSchedulerProvider;
 import com.example.tomek.howlongapp.util.schedulers.ImmediateSchedulerProvider;
-import com.google.android.gms.location.places.Place;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -59,7 +58,7 @@ public class RestaurantDetailPresenterTest {
         list.add(restaurant);
         ApiResponse reponse = new ApiResponse();
         reponse.setRestaurants(list);
-        doReturn(reponse).when(mockAppDataManaer).getmLocalResponse();
+        doReturn(reponse).when(mockAppDataManaer).getLocalResponse();
         Restaurant restaurant2 = mPresenter.findReastaurant(1);
         Assert.assertEquals(restaurant, restaurant2);
     }
@@ -85,7 +84,7 @@ public class RestaurantDetailPresenterTest {
         list.add(restaurant);
         ApiResponse reponse = new ApiResponse();
         reponse.setRestaurants(list);
-        doReturn(reponse).when(mockAppDataManaer).getmLocalResponse();
+        doReturn(reponse).when(mockAppDataManaer).getLocalResponse();
         mPresenter.start();
 
         verify(mockView).showReports(reports);
