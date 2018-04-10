@@ -3,6 +3,7 @@ package com.example.tomek.howlongapp.ui.main;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -19,7 +20,7 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
-
+git
 import java.util.List;
 
 import javax.inject.Inject;
@@ -38,6 +39,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @BindView(R.id.lv_restautants) ListView lvRestaurantsList;
     @BindView(R.id.btn_addPlace) Button btnAddPlaceButton;
     @BindView(R.id.sv_search) SearchView svSearch;
+    @BindView(R.id.my_toolbar) Toolbar toolBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         mPresenter.attachView(this);
         mPresenter.start();
 
+        setSupportActionBar(toolBar);
 
         lvRestaurantsList.setAdapter(mRestaurantsAdapter);
         lvRestaurantsList.setTextFilterEnabled(true);
