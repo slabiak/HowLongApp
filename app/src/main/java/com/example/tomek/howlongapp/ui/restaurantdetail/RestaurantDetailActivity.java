@@ -2,6 +2,7 @@ package com.example.tomek.howlongapp.ui.restaurantdetail;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -34,6 +35,7 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
     @BindView(R.id.list_reports) ListView lvReports;
     @BindView(R.id.btn_addReport) Button btnAddReport;
     @BindView(R.id.image_thumbnail_detail) ImageView imThumbnail;
+    @BindView(R.id.toolbar_detail) Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,8 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
         presenter.setID(getID());
         presenter.start();
 
+
+        setSupportActionBar(toolbar);
         lvReports.setAdapter(reportsAdapter);
 
         btnAddReport.setOnClickListener(new View.OnClickListener() {

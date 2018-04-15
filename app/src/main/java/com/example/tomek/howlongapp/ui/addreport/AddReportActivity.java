@@ -2,6 +2,7 @@ package com.example.tomek.howlongapp.ui.addreport;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +26,7 @@ public class AddReportActivity extends BaseActivity implements AddReportContract
     @BindView(R.id.input_author) EditText etAuthor;
     @BindView(R.id.input_watingTime) EditText etWaitingTime;
     @BindView(R.id.btn_addReport) Button btnAddReport;
-
+    @BindView(R.id.toolbar_add) Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +37,7 @@ public class AddReportActivity extends BaseActivity implements AddReportContract
         presenter.attachView(this);
         presenter.setID(getID());
         presenter.start();
+        setSupportActionBar(toolbar);
 
         btnAddReport.setOnClickListener(new View.OnClickListener() {
             @Override

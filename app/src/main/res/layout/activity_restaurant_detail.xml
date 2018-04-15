@@ -11,7 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <include
+            android:id="@+id/toolbar_detail"
+            layout="@layout/app_bar">
 
+        </include>
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
