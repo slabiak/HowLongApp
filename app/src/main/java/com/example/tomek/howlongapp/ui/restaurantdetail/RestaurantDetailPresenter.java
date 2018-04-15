@@ -29,7 +29,12 @@ public class RestaurantDetailPresenter extends BasePresenter<RestaurantDetailCon
         String reference = findReastaurant(ID).getPhotoReference();
         String url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference=" + reference + "&key=" + BuildConfig.GoogleSecAPIKEY;
         getMvpView().loadImage(url);
+        if(findReastaurant(ID).getReports().isEmpty()){
+
+        }else{
+
         getMvpView().showReports(findReastaurant(ID).getReports());
+        }
         getMvpView().showRetaurantsDetails(findReastaurant(ID).getName(), findReastaurant(ID).getAddress(), findReastaurant(ID).getReports().size(), findReastaurant(ID).getMean());
     }
 

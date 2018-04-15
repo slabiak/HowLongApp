@@ -37,6 +37,7 @@ public class AddReportActivity extends BaseActivity implements AddReportContract
         presenter.attachView(this);
         presenter.setID(getID());
         presenter.start();
+        toolbar.setTitle("Dodawanie raportu");
         setSupportActionBar(toolbar);
 
         btnAddReport.setOnClickListener(new View.OnClickListener() {

@@ -53,10 +53,16 @@ public class RestaurantsAdapter extends ArrayAdapter<Restaurant> implements Filt
         // Populate the data into the template view using the data object
         String reference = restaurant.getPhotoReference();
         String url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference=" + reference + "&key=" + BuildConfig.GoogleSecAPIKEY.toString();
-        Picasso.get().load(url).into(image);
+        Picasso
+                .get()
+                .load(url)
+                .resize(125, 125)
+                .centerCrop()
+                .into(image);
+
         name.setText(restaurant.getName());
         address.setText(restaurant.getAddress());
-        wait_time.setText(Integer.toString(restaurant.getMean()));
+        wait_time.setText(Integer.toString(restaurant.getMean())+ " min");
         // Return the completed view to render on screen
         return convertView;
     }

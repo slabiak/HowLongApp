@@ -19,6 +19,8 @@ public interface RestaurantDetailContract {
         void startAddReportActivity();
 
         void loadImage(String url);
+
+        void showNoReports();
     }
 
     interface Presenter extends com.example.tomek.howlongapp.ui.base.Presenter<View> {

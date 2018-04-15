@@ -36,6 +36,7 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
     @BindView(R.id.btn_addReport) Button btnAddReport;
     @BindView(R.id.image_thumbnail_detail) ImageView imThumbnail;
     @BindView(R.id.toolbar_detail) Toolbar toolbar;
+    @BindView(R.id.text_no_reports) TextView tvNoReports;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
         presenter.setID(getID());
         presenter.start();
 
-
+        toolbar.setTitle("Raporty restauracji");
         setSupportActionBar(toolbar);
         lvReports.setAdapter(reportsAdapter);
 
@@ -64,6 +65,7 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
 
     @Override
     public void showReports(List<Report> reports) {
+        tvNoReports.setVisibility(View.GONE);
         reportsAdapter.clear();
         reportsAdapter.setReports(reports);
     }
@@ -85,6 +87,16 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
 
     @Override
     public void loadImage(String url) {
-        Picasso.get().load(url).into(imThumbnail);
+        Picasso
+                .get()
+                .load(url)
+                .resize(150, 150)
+                .centerCrop()
+                .into(imThumbnail);
+    }
+
+    @Override
+    public void showNoReports() {
+        tvNoReports.setVisibility(View.VISIBLE);
     }
 }
