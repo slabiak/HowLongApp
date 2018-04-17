@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -37,6 +38,7 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
     @BindView(R.id.image_thumbnail_detail) ImageView imThumbnail;
     @BindView(R.id.toolbar_detail) Toolbar toolbar;
     @BindView(R.id.text_no_reports) TextView tvNoReports;
+    @BindView(R.id.header) LinearLayout header;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +98,19 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
     }
 
     @Override
-    public void showNoReports() {
-        tvNoReports.setVisibility(View.VISIBLE);
+    public void emptyList(boolean empty) {
+
+        if (empty){
+            tvNoReports.setVisibility(View.VISIBLE);
+            header.setVisibility(View.GONE);
+            lvReports.setVisibility(View.GONE);
+        }
+        else {
+            tvNoReports.setVisibility(View.GONE);
+            header.setVisibility(View.VISIBLE);
+            lvReports.setVisibility(View.VISIBLE);
+
+        }
+
     }
 }
