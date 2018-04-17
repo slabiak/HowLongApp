@@ -93,5 +93,26 @@ public class RestaurantDetailPresenterTest {
     }
 
 
+    @Test
+    public void shouldShowNoReportsTxtWhenReportsListEmpty(){
+        mPresenter.setID(1);
+        Restaurant restaurant = new Restaurant();
+        restaurant.setId(1);
+        restaurant.setName("Name");
+        restaurant.setAddress("address");
+        restaurant.setMean(15);
+        restaurant.setPhotoReference("photo_reference");
+        ArrayList<Report> reports = new ArrayList<Report>();
+        restaurant.setReports(reports);
+        ArrayList<Restaurant> list = new ArrayList<Restaurant>();
+        list.add(restaurant);
+        ApiResponse reponse = new ApiResponse();
+        reponse.setRestaurants(list);
+        doReturn(reponse).when(mockAppDataManaer).getLocalResponse();
+        mPresenter.start();
+        verify(mockView).showEmptyList(true);
+    }
+
+
 
 }
