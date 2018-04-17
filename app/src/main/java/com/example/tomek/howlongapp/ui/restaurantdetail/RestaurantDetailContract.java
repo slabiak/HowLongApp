@@ -20,7 +20,7 @@ public interface RestaurantDetailContract {
 
         void loadImage(String url);
 
-        void emptyList (boolean empty);
+        void showEmptyList(boolean empty);
     }
 
     interface Presenter extends com.example.tomek.howlongapp.ui.base.Presenter<View> {

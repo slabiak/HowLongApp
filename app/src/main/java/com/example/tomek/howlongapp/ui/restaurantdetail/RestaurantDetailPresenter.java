@@ -31,9 +31,9 @@ public class RestaurantDetailPresenter extends BasePresenter<RestaurantDetailCon
         getMvpView().loadImage(url);
 
         if(findReastaurant(ID).getReports().isEmpty()){
-                getMvpView().emptyList(true);
+                getMvpView().showEmptyList(true);
         }else{
-        getMvpView().emptyList(false);
+        getMvpView().showEmptyList(false);
         getMvpView().showReports(findReastaurant(ID).getReports());
         }
 

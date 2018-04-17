@@ -1,6 +1,7 @@
 package com.example.tomek.howlongapp.ui.restaurantdetail;
 
 import android.content.Intent;
+import android.widget.ImageView;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -39,6 +40,7 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
     @BindView(R.id.toolbar_detail) Toolbar toolbar;
     @BindView(R.id.text_no_reports) TextView tvNoReports;
     @BindView(R.id.header) LinearLayout header;
+    @BindView(R.id.image_no_reports) ImageView imNoReports;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,15 +100,18 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
     }
 
     @Override
-    public void emptyList(boolean empty) {
+    public void showEmptyList(boolean empty) {
 
         if (empty){
             tvNoReports.setVisibility(View.VISIBLE);
+            imNoReports.setVisibility(View.VISIBLE);
             header.setVisibility(View.GONE);
             lvReports.setVisibility(View.GONE);
+
         }
         else {
             tvNoReports.setVisibility(View.GONE);
+            imNoReports.setVisibility(View.GONE);
             header.setVisibility(View.VISIBLE);
             lvReports.setVisibility(View.VISIBLE);
 
