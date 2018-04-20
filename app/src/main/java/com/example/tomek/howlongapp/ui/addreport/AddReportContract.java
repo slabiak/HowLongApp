@@ -13,13 +13,15 @@ public interface AddReportContract {
         void showRestaurantName(String name);
 
         void startMainActivity();
+
+        public void showMessage(String text);
     }
 
     interface Presenter extends com.example.tomek.howlongapp.ui.base.Presenter<View> {
 
         void start();
 
-        void onAddButtonClicked(String author, Integer waitingTime);
+        void onAddButtonClicked(String author, String waitingTime);
 
         void setID(Integer id);
 

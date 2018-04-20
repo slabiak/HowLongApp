@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tomek.howlongapp.R;
 import com.example.tomek.howlongapp.ui.base.BaseActivity;
@@ -43,7 +44,7 @@ public class AddReportActivity extends BaseActivity implements AddReportContract
         btnAddReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.onAddButtonClicked(etAuthor.getText().toString(), Integer.parseInt(etWaitingTime.getText().toString()));
+                presenter.onAddButtonClicked(etAuthor.getText().toString(), etWaitingTime.getText().toString());
             }
         });
     }
@@ -57,5 +58,10 @@ public class AddReportActivity extends BaseActivity implements AddReportContract
     public void startMainActivity() {
         Intent intent = new Intent(AddReportActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void showMessage(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
 }

@@ -32,8 +32,12 @@ public class AddReportPresenter extends BasePresenter<AddReportContract.View> im
 
 
     @Override
-    public void onAddButtonClicked(String author, Integer waitingTime) {
-        addReport(ID, waitingTime, author);
+    public void onAddButtonClicked(String author, String waitingTime) {
+        if(waitingTime.isEmpty() || author.isEmpty()){
+            getMvpView().showMessage("Uzupełnij wszystkie dane!");
+        } else {
+            addReport(ID, Integer.parseInt(waitingTime), author);
+        }
     }
 
     public Integer getID() {
