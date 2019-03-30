@@ -64,7 +64,7 @@ public class RestaurantDetailPresenterTest {
     }
 
 
-    @Test
+   /* @Test
     public void shoulShowRestaurantDetailsOnStart(){
         mPresenter.setID(1);
         Restaurant restaurant = new Restaurant();
@@ -90,7 +90,7 @@ public class RestaurantDetailPresenterTest {
         verify(mockView).showReports(reports);
         verify(mockView).loadImage(anyString());
         verify(mockView).showRetaurantsDetails(anyString(),anyString(), anyInt(), anyInt());
-    }
+    }*/
 
 
     @Test

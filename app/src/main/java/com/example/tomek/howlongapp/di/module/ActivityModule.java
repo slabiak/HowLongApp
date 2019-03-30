@@ -10,7 +10,6 @@ import com.example.tomek.howlongapp.ui.main.MainContract;
 import com.example.tomek.howlongapp.ui.main.MainPresenter;
 import com.example.tomek.howlongapp.ui.restaurantdetail.RestaurantDetailContract;
 import com.example.tomek.howlongapp.ui.restaurantdetail.RestaurantDetailPresenter;
-import com.example.tomek.howlongapp.util.schedulers.ImmediateSchedulerProvider;
 import com.example.tomek.howlongapp.util.schedulers.SchedulerProvider;
 
 import dagger.Module;

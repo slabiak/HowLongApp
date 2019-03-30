@@ -1,5 +1,7 @@
 package com.example.tomek.howlongapp.data.model;
 
+import java.util.Date;
+
 /**
  * Created by slabiaq on 02.02.2018.
  */
@@ -7,8 +9,8 @@ package com.example.tomek.howlongapp.data.model;
 public class Report {
 
 
-    private Integer waitingTime;
-    private String createdAt;
+    private int waitingTime;
+    private Date createdAt;
     private String createdBy;
 
     public Integer getWaitingTime() {
@@ -19,11 +21,11 @@ public class Report {
         this.waitingTime = waitingTime;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ApiResponse {
 
-    private Boolean error;
+    private boolean error;
     private String message;
     private List<Restaurant> restaurants;
 

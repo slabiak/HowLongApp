@@ -10,12 +10,12 @@ import java.util.List;
 
 public class Restaurant implements Comparable {
 
-    private Integer id;
+    private int id;
     private String name;
     private String address;
     private String googleId;
     private List<Report> reports;
-    private Integer mean;
+    private int mean;
     private String photo_reference;
 
     public Integer getId() {

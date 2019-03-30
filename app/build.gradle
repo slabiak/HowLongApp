@@ -14,9 +14,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', "GoogleSecAPIKEY", GoogleApiKey
         }
-        buildTypes.each {
-            it.buildConfigField 'String', 'GoogleSecAPIKEY', GoolgeAPIKey
+        debug {
+            buildConfigField 'String', "GoogleSecAPIKEY", GoogleApiKey
         }
 
     }
@@ -40,7 +41,7 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
 
     compile 'com.google.dagger:dagger-android:2.11'
-    compile 'com.google.dagger:dagger-android-support:2.11' // if you use the support libraries
+    compile 'com.google.dagger:dagger-android-support:2.11'
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
 

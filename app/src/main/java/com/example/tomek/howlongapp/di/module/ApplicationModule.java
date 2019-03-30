@@ -23,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApplicationModule {
 
     protected final Application mApplication;
-    String BASE_URL = "http://slabiaq.ayz.pl/";
+    String BASE_URL = "http://10.0.2.2:8080/";
 
     public ApplicationModule(Application application) {
         mApplication = application;

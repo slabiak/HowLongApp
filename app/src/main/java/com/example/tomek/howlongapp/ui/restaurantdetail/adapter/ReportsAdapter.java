@@ -12,6 +12,7 @@ import com.example.tomek.howlongapp.R;
 import com.example.tomek.howlongapp.data.model.Report;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -46,8 +47,8 @@ public class ReportsAdapter extends ArrayAdapter<Report> {
         ImageView image2 = convertView.findViewById(R.id.image_thumbnail_detail);
         // Populate the data into the template view using the data object
         createdBy.setText(report.getCreatedBy());
-        String time = report.getCreatedAt().split(" ")[1].toString();
-        createdAt.setText(time);
+        Date time = report.getCreatedAt();
+        createdAt.setText(time.toString());
 
         waitingTime.setText(Integer.toString(report.getWaitingTime()) + " min");
         return convertView;
