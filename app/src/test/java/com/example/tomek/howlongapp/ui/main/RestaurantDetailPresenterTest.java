@@ -1,7 +1,6 @@
 package com.example.tomek.howlongapp.ui.main;
 
 import com.example.tomek.howlongapp.data.AppDataManager;
-import com.example.tomek.howlongapp.data.model.ApiResponse;
 import com.example.tomek.howlongapp.data.model.Report;
 import com.example.tomek.howlongapp.data.model.Restaurant;
 import com.example.tomek.howlongapp.ui.restaurantdetail.RestaurantDetailContract;
@@ -17,8 +16,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 

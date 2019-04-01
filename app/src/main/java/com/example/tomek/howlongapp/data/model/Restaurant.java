@@ -2,6 +2,7 @@ package com.example.tomek.howlongapp.data.model;
 
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,8 +16,15 @@ public class Restaurant implements Comparable {
     private String address;
     private String googleId;
     private List<Report> reports;
-    private int mean;
-    private String photo_reference;
+    private String photoReference;
+
+    public Restaurant(String name, String address, String googleId, String photoReference){
+        this.name = name;
+        this.address = address;
+        this.googleId = googleId;
+        this.photoReference = photoReference;
+        this.reports = new ArrayList<Report>();
+    }
 
     public Integer getId() {
         return id;
@@ -58,13 +66,20 @@ public class Restaurant implements Comparable {
         this.reports = reports;
     }
 
-    public Integer getMean() {
+    public int getMeanWaitingTime(){
+        int mean = 0;
+        if(reports!=null){
+            if(reports.size()>0){
+                for(Report report : reports){
+                    mean += report.getWaitingTime();
+                }
+                mean = mean/reports.size();
+                return mean;
+            }
+        }
         return mean;
     }
 
-    public void setMean(Integer mean) {
-        this.mean = mean;
-    }
 
     @Override
     public String toString() {
@@ -74,15 +89,14 @@ public class Restaurant implements Comparable {
     @Override
     public int compareTo(@NonNull Object o) {
         Restaurant restaurant = (Restaurant) o;
-        int cmp = Double.compare(((Restaurant) o).getMean(), this.mean);
-        return cmp;
+        return restaurant.getMeanWaitingTime() - this.getMeanWaitingTime();
     }
 
     public String getPhotoReference() {
-        return photo_reference;
+        return photoReference;
     }
 
     public void setPhotoReference(String photo_reference) {
-        this.photo_reference = photo_reference;
+        this.photoReference = photo_reference;
     }
 }

@@ -1,17 +1,14 @@
 package com.example.tomek.howlongapp.ui.main;
 
 import com.example.tomek.howlongapp.data.AppDataManager;
-import com.example.tomek.howlongapp.data.model.ApiResponse;
 import com.example.tomek.howlongapp.data.model.Restaurant;
 import com.example.tomek.howlongapp.ui.base.BasePresenter;
+import com.example.tomek.howlongapp.util.ErrorUtils;
 import com.example.tomek.howlongapp.util.schedulers.BaseSchedulerProvider;
 import com.google.android.gms.location.places.Place;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import org.reactivestreams.Subscription;
-
-import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -24,11 +21,8 @@ import io.reactivex.disposables.Disposable;
 
 public class MainPresenter extends BasePresenter<MainContract.View> implements MainContract.Presenter {
 
-    private static final String TAG = "MyActivity";
     private final BaseSchedulerProvider mBaseSchedulerProvider;
-    public Subscription mSubscription;
     private AppDataManager mAppDataManager;
-    private ApiResponse mApiResponseCached;
 
     public MainPresenter(AppDataManager appDataManager, BaseSchedulerProvider baseSchedulerProvider) {
         mAppDataManager = appDataManager;
@@ -69,29 +63,26 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     public void createRestaurant(String name, String address, String googleID, String imageURL) {
 
         if (!(empty(name) || empty(address) || empty(googleID) || empty(imageURL))) {
-            mAppDataManager.createRestaurant(name, address, googleID, imageURL)
+            Restaurant restaurant = new Restaurant(name,address,googleID,imageURL);
+            mAppDataManager.createRestaurant(restaurant)
                     .subscribeOn(mBaseSchedulerProvider.io())
                     .observeOn(mBaseSchedulerProvider.ui())
-                    .subscribe(new Observer<ApiResponse>() {
+                    .subscribe(new Observer<Restaurant>() {
                         @Override
                         public void onSubscribe(Disposable d) {
                                       }
 
                         @Override
-                        public void onNext(ApiResponse apiResponse) {
-                            if (apiResponse.getError() == false) {
-                                mAppDataManager.setLocalResponse(apiResponse);
-                                List<Restaurant> list = apiResponse.getRestaurants();
-                                Collections.sort(list);
-                                getMvpView().showRestaurants(list);
+                        public void onNext(Restaurant restaurant) {
+                                mAppDataManager.addRestaurantToLocalRestauantsList(restaurant);
+                                List<Restaurant> restaurants = mAppDataManager.getLocalRestaurantsList();
+                                getMvpView().showRestaurants(restaurants);
                                 getMvpView().showMessage("Restauracja dodana pomyślnie!");
-                            } else {
-                                getMvpView().showMessage("Wybrana restauracja jest już w bazie!");
                             }
-                        }
 
                         @Override
                         public void onError(Throwable e) {
+                            getMvpView().showMessage(ErrorUtils.getErrorMessage(e));
                         }
 
                         @Override
@@ -105,31 +96,25 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     public void loadRestaurants() {
 
-        getMvpView().showLoadingProgress(true);
         mAppDataManager.getRR()
                 .subscribeOn(mBaseSchedulerProvider.io())
                 .observeOn(mBaseSchedulerProvider.ui())
-                .subscribe(new Observer<ApiResponse>() {
+                .subscribe(new Observer<List<Restaurant>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
+                        getMvpView().showLoadingProgress(true);
                     }
 
                     @Override
-                    public void onNext(ApiResponse apiResponse) {
-                        if (apiResponse.getError() == false) {
-                            mAppDataManager.setLocalResponse(apiResponse);
-                            List<Restaurant> list = apiResponse.getRestaurants();
-                            Collections.sort(list);
-                            getMvpView().showRestaurants(list);
-                        } else {
-                            getMvpView().showMessage(apiResponse.getMessage());
-                        }
+                    public void onNext(List<Restaurant> restaurants) {
+                            mAppDataManager.setLocalRestaurantsList(restaurants);
+                            getMvpView().showRestaurants(restaurants);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         getMvpView().showLoadingProgress(false);
-                        getMvpView().showMessage("Błąd łączenia z bazą danych! Spróbuj pózniej");
+                        getMvpView().showMessage(ErrorUtils.getErrorMessage(e));
                     }
 
                     @Override

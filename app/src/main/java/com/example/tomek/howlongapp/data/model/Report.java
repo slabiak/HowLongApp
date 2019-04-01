@@ -8,10 +8,14 @@ import java.util.Date;
 
 public class Report {
 
-
     private int waitingTime;
     private Date createdAt;
     private String createdBy;
+
+    public Report(int waitingTime, String createdBy){
+        this.waitingTime =waitingTime;
+        this.createdBy = createdBy;
+    }
 
     public Integer getWaitingTime() {
         return waitingTime;

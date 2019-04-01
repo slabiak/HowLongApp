@@ -1,12 +1,15 @@
 package com.example.tomek.howlongapp.data.network;
 
-import com.example.tomek.howlongapp.data.model.ApiResponse;
+import com.example.tomek.howlongapp.data.model.Report;
+import com.example.tomek.howlongapp.data.model.Restaurant;
+
+import java.util.List;
 
 import io.reactivex.Observable;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 
 /**
@@ -16,16 +19,13 @@ import retrofit2.http.POST;
 
 public interface RestaurantsService {
 
-
-    @FormUrlEncoded
     @POST("restaurants")
-    Observable<ApiResponse> createRestaurant(@Field("name") String name, @Field("address") String address, @Field("google_id") String google_id, @Field("imageURL") String imageURL);
+    Observable<Restaurant> createRestaurant(@Body Restaurant restaurant);
 
-    @FormUrlEncoded
-    @POST("reports")
-    Observable<ApiResponse> addReport(@Field("restaurant_id") Integer restaurant_id, @Field("waiting_time") Integer wait_time, @Field("created_by") String created_by);
+    @POST("restaurants/{restaurantId}/reports")
+    Observable<Report> addReport(@Body Report report,@Path("restaurantId") int restaurantId);
 
     @GET("restaurants")
-    Observable<ApiResponse> getRR();
+    Observable<List<Restaurant>> getRR();
 
 }

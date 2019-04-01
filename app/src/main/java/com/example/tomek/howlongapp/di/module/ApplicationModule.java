@@ -6,6 +6,8 @@ import android.content.Context;
 import com.example.tomek.howlongapp.data.network.PlacesService;
 import com.example.tomek.howlongapp.data.network.RestaurantsService;
 import com.example.tomek.howlongapp.di.ApplicationContext;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import javax.inject.Singleton;
@@ -23,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApplicationModule {
 
     protected final Application mApplication;
-    String BASE_URL = "http://10.0.2.2:8080/";
+    String BASE_URL = "http://10.0.2.2:8080/api/";
 
     public ApplicationModule(Application application) {
         mApplication = application;
@@ -48,10 +50,12 @@ public class ApplicationModule {
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
                 .build();*/
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         return retrofit.create(RestaurantsService.class);
     }

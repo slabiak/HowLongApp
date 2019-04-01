@@ -62,7 +62,7 @@ public class RestaurantsAdapter extends ArrayAdapter<Restaurant> implements Filt
 
         name.setText(restaurant.getName());
         address.setText(restaurant.getAddress());
-        wait_time.setText(Integer.toString(restaurant.getMean())+ " min");
+        wait_time.setText(Integer.toString(restaurant.getMeanWaitingTime())+ " min");
         // Return the completed view to render on screen
         return convertView;
     }

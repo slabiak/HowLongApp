@@ -1,7 +1,7 @@
 package com.example.tomek.howlongapp.ui.addreport;
 
 import com.example.tomek.howlongapp.data.AppDataManager;
-import com.example.tomek.howlongapp.data.model.ApiResponse;
+import com.example.tomek.howlongapp.data.model.Report;
 import com.example.tomek.howlongapp.data.model.Restaurant;
 import com.example.tomek.howlongapp.ui.base.BasePresenter;
 import com.example.tomek.howlongapp.util.schedulers.BaseSchedulerProvider;
@@ -49,18 +49,19 @@ public class AddReportPresenter extends BasePresenter<AddReportContract.View> im
         this.ID = ID;
     }
 
-    public void addReport(Integer id, Integer waitingTime, String createdBy) {
-        mAppDataManager.addReport(id, waitingTime, createdBy)
+    public void addReport(int restaurantId, int waitingTime, String createdBy) {
+        Report report = new Report(waitingTime,createdBy);
+        mAppDataManager.addReport(report,restaurantId)
                 .subscribeOn(mBaseSchedulerProvider.io())
                 .observeOn(mBaseSchedulerProvider.ui())
-                .subscribe(new Observer<ApiResponse>() {
+                .subscribe(new Observer<Report>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(ApiResponse value) {
+                    public void onNext(Report report) {
 
                     }
 
@@ -77,7 +78,7 @@ public class AddReportPresenter extends BasePresenter<AddReportContract.View> im
     }
 
     public Restaurant findReastaurant(Integer ID) {
-        for (Restaurant restaurant : mAppDataManager.getLocalResponse().getRestaurants()) {
+        for (Restaurant restaurant : mAppDataManager.getLocalRestaurantsList()) {
             if (restaurant.getId() == ID) {
                 return restaurant;
             }

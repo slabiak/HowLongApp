@@ -1,19 +1,14 @@
 package com.example.tomek.howlongapp.ui.main;
 
 import com.example.tomek.howlongapp.data.AppDataManager;
-import com.example.tomek.howlongapp.data.model.ApiResponse;
 import com.example.tomek.howlongapp.data.model.Restaurant;
 import com.example.tomek.howlongapp.util.schedulers.BaseSchedulerProvider;
 import com.example.tomek.howlongapp.util.schedulers.ImmediateSchedulerProvider;
 import com.google.android.gms.location.places.Place;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

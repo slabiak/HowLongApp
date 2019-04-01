@@ -37,7 +37,7 @@ public class RestaurantDetailPresenter extends BasePresenter<RestaurantDetailCon
         getMvpView().showReports(findReastaurant(ID).getReports());
         }
 
-        getMvpView().showRetaurantsDetails(findReastaurant(ID).getName(), findReastaurant(ID).getAddress(), findReastaurant(ID).getReports().size(), findReastaurant(ID).getMean());
+        getMvpView().showRetaurantsDetails(findReastaurant(ID).getName(), findReastaurant(ID).getAddress(), findReastaurant(ID).getReports().size(), findReastaurant(ID).getMeanWaitingTime());
     }
 
     @Override
@@ -56,7 +56,7 @@ public class RestaurantDetailPresenter extends BasePresenter<RestaurantDetailCon
     }
 
     public Restaurant findReastaurant(Integer ID) {
-        for (Restaurant restaurant : mAppDataManager.getLocalResponse().getRestaurants()) {
+        for (Restaurant restaurant : mAppDataManager.getLocalRestaurantsList()) {
             if (restaurant.getId() == ID) {
                 return restaurant;
             }
