@@ -11,7 +11,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
-    tools:context="com.example.tomek.howlongapp.ui.main.MainActivity">
+    tools:context="com.slabiak.tomek.howlongapp.ui.main.MainActivity">
 
 
 

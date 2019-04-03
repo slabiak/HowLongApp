@@ -14,7 +14,7 @@ android {
 
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.example.tomek.howlongapp"
+        applicationId "com.slabiak.tomek.howlongapp"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
