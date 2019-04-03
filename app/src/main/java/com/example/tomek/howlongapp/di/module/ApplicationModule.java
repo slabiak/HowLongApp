@@ -3,6 +3,7 @@ package com.example.tomek.howlongapp.di.module;
 import android.app.Application;
 import android.content.Context;
 
+import com.example.tomek.howlongapp.BuildConfig;
 import com.example.tomek.howlongapp.data.network.PlacesService;
 import com.example.tomek.howlongapp.data.network.RestaurantsService;
 import com.example.tomek.howlongapp.di.ApplicationContext;
@@ -25,7 +26,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApplicationModule {
 
     protected final Application mApplication;
-    String BASE_URL = "http://10.0.2.2:8080/api/";
 
     public ApplicationModule(Application application) {
         mApplication = application;
@@ -53,7 +53,7 @@ public class ApplicationModule {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(BuildConfig.HowLongAppRestApiBaseUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
@@ -68,7 +68,7 @@ public class ApplicationModule {
                 .readTimeout(10, TimeUnit.SECONDS)
                 .build();*/
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://maps.googleapis.com/")
+                .baseUrl(BuildConfig.GoogleMapsApiBaseUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

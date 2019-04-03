@@ -17,8 +17,8 @@ public class ErrorUtils {
             try {
                 apiErrorResponse = new Gson().fromJson(response.errorBody().string(),ApiErrorResponse.class);
                 return apiErrorResponse.toString();
-            } catch (IOException ioException) {
-                return ioException.getMessage();
+            } catch (Exception exception) {
+                return exception.getMessage();
             }
         }
         else return e.getMessage();
