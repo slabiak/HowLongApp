@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.tomek.howlongapp.R;
 import com.example.tomek.howlongapp.data.model.Report;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,8 +48,8 @@ public class ReportsAdapter extends ArrayAdapter<Report> {
         ImageView image2 = convertView.findViewById(R.id.image_thumbnail_detail);
         // Populate the data into the template view using the data object
         createdBy.setText(report.getCreatedBy());
-        Date time = report.getCreatedAt();
-        createdAt.setText(time.toString());
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        createdAt.setText(dateFormatter.format(report.getCreatedAt()));
 
         waitingTime.setText(Integer.toString(report.getWaitingTime()) + " min");
         return convertView;
