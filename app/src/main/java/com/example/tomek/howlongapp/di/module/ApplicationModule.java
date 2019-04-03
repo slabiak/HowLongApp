@@ -4,9 +4,11 @@ import android.app.Application;
 import android.content.Context;
 
 import com.example.tomek.howlongapp.BuildConfig;
+import com.example.tomek.howlongapp.data.model.Restaurant;
 import com.example.tomek.howlongapp.data.network.PlacesService;
 import com.example.tomek.howlongapp.data.network.RestaurantsService;
 import com.example.tomek.howlongapp.di.ApplicationContext;
+import com.example.tomek.howlongapp.util.AppointmentDeserializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -67,10 +69,11 @@ public class ApplicationModule {
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
                 .build();*/
+        Gson gson = new GsonBuilder().registerTypeAdapter(Restaurant.class, new AppointmentDeserializer()).create();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BuildConfig.GoogleMapsApiBaseUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         return retrofit.create(PlacesService.class);
     }

@@ -1,5 +1,6 @@
 package com.example.tomek.howlongapp.data.network;
 
+import com.example.tomek.howlongapp.data.model.Restaurant;
 import com.google.gson.JsonObject;
 
 import io.reactivex.Observable;
@@ -13,6 +14,6 @@ import retrofit2.http.Query;
 public interface PlacesService {
 
     @GET("maps/api/place/details/json")
-    Observable<JsonObject> getPlaceJson(@Query("key") String key, @Query("placeid") String googleId);
+    Observable<Restaurant> getPlaceJson(@Query("key") String key, @Query("placeid") String googleId);
 
 }

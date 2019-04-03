@@ -45,7 +45,7 @@ public class AppDataManager {
         return mRestaurantService.getRR();
     }
 
-    public Observable<JsonObject> getPlaceDetails(String googleId) {
+    public Observable<Restaurant> getPlaceDetails(String googleId) {
         return mPlacesService.getPlaceJson(BuildConfig.GoogleSecAPIKEY, googleId);
     }
 

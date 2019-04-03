@@ -60,10 +60,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         }
     }
 
-    public void createRestaurant(String name, String address, String googleID, String imageURL) {
-
-        if (!(empty(name) || empty(address) || empty(googleID) || empty(imageURL))) {
-            Restaurant restaurant = new Restaurant(name,address,googleID,imageURL);
+    public void createRestaurant(Restaurant restaurant) {
             mAppDataManager.createRestaurant(restaurant)
                     .subscribeOn(mBaseSchedulerProvider.io())
                     .observeOn(mBaseSchedulerProvider.ui())
@@ -89,9 +86,6 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                         public void onComplete() {
                         }
                     });
-        } else {
-            getMvpView().showMessage("Błąd! Restauracja nie ma kompletnych danych");
-        }
     }
 
     public void loadRestaurants() {
@@ -128,26 +122,16 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         mAppDataManager.getPlaceDetails(google_id)
                 .subscribeOn(mBaseSchedulerProvider.io())
                 .observeOn(mBaseSchedulerProvider.ui())
-                .subscribe(new Observer<JsonObject>() {
+                .subscribe(new Observer<Restaurant>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                     }
 
                     @Override
-                    public void onNext(JsonObject response) {
-
-                        JsonObject result = response.getAsJsonObject("result");
-                        JsonElement photos = result.get("photos");
-                        JsonElement jsonName = result.get("name");
-                        JsonElement jsonGoogle_id = result.get("id");
-                        JsonElement jsonAddres = result.get("formatted_address");
-
-                        String photo_reference = photos.getAsJsonArray().get(0).getAsJsonObject().get("photo_reference").getAsString();
-                        String name = jsonName.getAsString();
-                        String google_id = jsonGoogle_id.getAsString();
-                        String address = jsonAddres.getAsString();
-
-                        createRestaurant(name, address, google_id, photo_reference);
+                    public void onNext(Restaurant restaurant) {
+                        if(restaurant!=null){
+                            createRestaurant(restaurant);
+                        }
                     }
 
                     @Override
