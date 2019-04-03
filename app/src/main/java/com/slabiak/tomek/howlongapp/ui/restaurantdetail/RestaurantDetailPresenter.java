@@ -15,7 +15,7 @@ import javax.inject.Inject;
 public class RestaurantDetailPresenter extends BasePresenter<RestaurantDetailContract.View> implements RestaurantDetailContract.Presenter {
 
     AppDataManager mAppDataManager;
-    private Integer ID;
+    private int restaurantId;
     private final BaseSchedulerProvider mBaseSchedulerProvider;
 
     @Inject
@@ -26,28 +26,28 @@ public class RestaurantDetailPresenter extends BasePresenter<RestaurantDetailCon
 
     @Override
     public void start() {
-        String reference = findReastaurant(ID).getPhotoReference();
+        String reference = findReastaurant(restaurantId).getPhotoReference();
         String url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=100&photoreference=" + reference + "&key=" + BuildConfig.GoogleSecAPIKEY;
         getMvpView().loadImage(url);
 
-        if(findReastaurant(ID).getReports().isEmpty()){
+        if(findReastaurant(restaurantId).getReports().isEmpty()){
                 getMvpView().showEmptyList(true);
         }else{
         getMvpView().showEmptyList(false);
-        getMvpView().showReports(findReastaurant(ID).getReports());
+        getMvpView().showReports(findReastaurant(restaurantId).getReports());
         }
 
-        getMvpView().showRetaurantsDetails(findReastaurant(ID).getName(), findReastaurant(ID).getAddress(), findReastaurant(ID).getReports().size(), findReastaurant(ID).getMeanWaitingTime());
+        getMvpView().showRetaurantsDetails(findReastaurant(restaurantId).getName(), findReastaurant(restaurantId).getAddress(), findReastaurant(restaurantId).getReports().size(), findReastaurant(restaurantId).getMeanWaitingTime());
     }
 
     @Override
-    public Integer getID() {
-        return ID;
+    public int getID() {
+        return restaurantId;
     }
 
     @Override
-    public void setID(Integer ID) {
-        this.ID = ID;
+    public void setID(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     @Override
@@ -55,9 +55,9 @@ public class RestaurantDetailPresenter extends BasePresenter<RestaurantDetailCon
         getMvpView().startAddReportActivity();
     }
 
-    public Restaurant findReastaurant(Integer ID) {
+    public Restaurant findReastaurant(int restaurantId) {
         for (Restaurant restaurant : mAppDataManager.getLocalRestaurantsList()) {
-            if (restaurant.getId() == ID) {
+            if (restaurant.getId() == restaurantId) {
                 return restaurant;
             }
         }

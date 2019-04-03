@@ -29,9 +29,9 @@ public interface RestaurantDetailContract {
 
         void onAddButtonClicked();
 
-        Integer getID();
+        int getID();
 
-        void setID(Integer id);
+        void setID(int id);
 
 
     }

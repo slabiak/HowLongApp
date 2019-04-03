@@ -32,11 +32,8 @@ public class BaseActivity extends AppCompatActivity {
         return mActivityComponent;
     }
 
-    public Integer getID() {
+    public int getID() {
         Bundle bundle = getIntent().getExtras();
-        if (bundle.getString("id") != null) {
-            return Integer.parseInt(bundle.getString("id"));
-        }
-        return null;
+        return bundle.getInt("id");
     }
 }

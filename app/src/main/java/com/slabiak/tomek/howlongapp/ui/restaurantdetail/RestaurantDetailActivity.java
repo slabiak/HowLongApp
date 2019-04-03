@@ -84,7 +84,7 @@ public class RestaurantDetailActivity extends BaseActivity implements Restaurant
     @Override
     public void startAddReportActivity() {
         Intent intent = new Intent(RestaurantDetailActivity.this, AddReportActivity.class);
-        intent.putExtra("id", presenter.getID().toString());
+        intent.putExtra("id", presenter.getID());
         startActivity(intent);
     }
 

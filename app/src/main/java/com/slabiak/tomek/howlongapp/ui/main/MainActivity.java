@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.slabiak.tomek.howlongapp.R;
 import com.slabiak.tomek.howlongapp.data.model.Restaurant;
+import com.slabiak.tomek.howlongapp.ui.addreport.AddReportActivity;
 import com.slabiak.tomek.howlongapp.ui.base.BaseActivity;
 import com.slabiak.tomek.howlongapp.ui.main.adapter.RestaurantsAdapter;
 import com.slabiak.tomek.howlongapp.ui.restaurantdetail.RestaurantDetailActivity;
@@ -62,9 +63,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Restaurant listItem = (Restaurant) lvRestaurantsList.getItemAtPosition(position);
-                Intent intent = new Intent(MainActivity.this, RestaurantDetailActivity.class);
-                intent.putExtra("id", listItem.getId().toString());
-                startActivity(intent);
+                startRestaurantDetailActivity(listItem.getId());
             }
         });
 
@@ -78,13 +77,20 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        mPresenter.refreshRestaurantsList();
+
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Place selectedplace = PlacePicker.getPlace(this, data);
                 mPresenter.onPlacePickerFinished(selectedplace);
             } else {
-                Toast.makeText(this, "Coś poszło nie tak!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Nie dodano restauracji", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -116,7 +122,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_search:
-                showMessage("ol");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -126,6 +131,13 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     public void showMessage(String text) {
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void startRestaurantDetailActivity(int restaurantId) {
+        Intent intent = new Intent(MainActivity.this, RestaurantDetailActivity.class);
+        intent.putExtra("id", restaurantId);
+        startActivity(intent);
     }
 
     @Override

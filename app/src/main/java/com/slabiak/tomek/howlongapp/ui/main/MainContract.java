@@ -20,6 +20,8 @@ public interface MainContract {
         void showRestaurants(List<Restaurant> restaurants);
 
         void showMessage(String text);
+
+        void startRestaurantDetailActivity(int restaurantId);
     }
 
     interface Presenter extends com.slabiak.tomek.howlongapp.ui.base.Presenter<View> {
@@ -28,6 +30,8 @@ public interface MainContract {
         void onAddPlaceButtonClicked();
 
         void onPlacePickerFinished(Place place);
+
+        void refreshRestaurantsList();
     }
 
 }

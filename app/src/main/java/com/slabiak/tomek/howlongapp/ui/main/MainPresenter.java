@@ -1,5 +1,6 @@
 package com.slabiak.tomek.howlongapp.ui.main;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.slabiak.tomek.howlongapp.data.AppDataManager;
 import com.slabiak.tomek.howlongapp.data.model.Restaurant;
 import com.slabiak.tomek.howlongapp.ui.base.BasePresenter;
@@ -27,14 +28,8 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         mBaseSchedulerProvider = baseSchedulerProvider;
     }
 
-    public static boolean empty(final String s) {
-        // Null-safe, short-circuit evaluation.
-        return s == null || s.trim().isEmpty();
-    }
-
     @Override
     public void start() {
-        loadRestaurants();
     }
 
     @Override
@@ -58,6 +53,11 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         }
     }
 
+    @Override
+    public void refreshRestaurantsList() {
+        loadRestaurants();
+    }
+
     public void createRestaurant(Restaurant restaurant) {
             mAppDataManager.createRestaurant(restaurant)
                     .subscribeOn(mBaseSchedulerProvider.io())
@@ -71,13 +71,13 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                         public void onNext(Restaurant restaurant) {
                                 mAppDataManager.addRestaurantToLocalRestauantsList(restaurant);
                                 List<Restaurant> restaurants = mAppDataManager.getLocalRestaurantsList();
-                                getMvpView().showRestaurants(restaurants);
                                 getMvpView().showMessage("Restauracja dodana pomyślnie!");
+                                getMvpView().startRestaurantDetailActivity(restaurant.getId());
                             }
 
                         @Override
                         public void onError(Throwable e) {
-                            getMvpView().showMessage(ErrorUtils.getErrorMessage(e));
+                                getMvpView().showMessage(ErrorUtils.getErrorMessage(e));
                         }
 
                         @Override
