@@ -47,7 +47,7 @@ public class RestaurantDetailPresenterTest {
         verify(mockView).startAddReportActivity();
     }
 
-    @Test
+/*    @Test
     public void shouldFindRestaurant(){
         Restaurant restaurant = new Restaurant();
         restaurant.setId(1);
@@ -58,7 +58,7 @@ public class RestaurantDetailPresenterTest {
         doReturn(reponse).when(mockAppDataManaer).getLocalResponse();
         Restaurant restaurant2 = mPresenter.findReastaurant(1);
         Assert.assertEquals(restaurant, restaurant2);
-    }
+    }*/
 
 
    /* @Test
@@ -90,7 +90,7 @@ public class RestaurantDetailPresenterTest {
     }*/
 
 
-    @Test
+/*    @Test
     public void shouldShowNoReportsTxtWhenReportsListEmpty(){
         mPresenter.setID(1);
         Restaurant restaurant = new Restaurant();
@@ -108,7 +108,7 @@ public class RestaurantDetailPresenterTest {
         doReturn(reponse).when(mockAppDataManaer).getLocalResponse();
         mPresenter.start();
         verify(mockView).showEmptyList(true);
-    }
+    }*/
 
 
 
