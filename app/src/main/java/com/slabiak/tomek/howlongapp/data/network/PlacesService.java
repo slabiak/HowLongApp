@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 
 public interface PlacesService {
 
-    @GET("maps/api/place/details/json")
+    @GET("maps/api/place/details/json?fields=id,name,formatted_address,photos")
     Observable<Restaurant> getPlaceJson(@Query("key") String key, @Query("placeid") String googleId);
 
 }

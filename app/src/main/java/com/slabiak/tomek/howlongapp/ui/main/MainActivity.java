@@ -13,17 +13,21 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.TypeFilter;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import com.slabiak.tomek.howlongapp.BuildConfig;
 import com.slabiak.tomek.howlongapp.R;
 import com.slabiak.tomek.howlongapp.data.model.Restaurant;
 import com.slabiak.tomek.howlongapp.ui.addreport.AddReportActivity;
 import com.slabiak.tomek.howlongapp.ui.base.BaseActivity;
 import com.slabiak.tomek.howlongapp.ui.main.adapter.RestaurantsAdapter;
 import com.slabiak.tomek.howlongapp.ui.restaurantdetail.RestaurantDetailActivity;
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlacePicker;
 
+
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -51,6 +55,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         setContentView(R.layout.activity_main);
         getActivityComponent().inject(this);
         ButterKnife.bind(this);
+        Places.initialize(getApplicationContext(), BuildConfig.GoogleSecAPIKEY);
         mPresenter.attachView(this);
         mPresenter.start();
 
@@ -87,7 +92,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
-                Place selectedplace = PlacePicker.getPlace(this, data);
+                Place selectedplace = Autocomplete.getPlaceFromIntent(data);
                 mPresenter.onPlacePickerFinished(selectedplace);
             } else {
                 Toast.makeText(this, "Nie dodano restauracji", Toast.LENGTH_LONG).show();
@@ -158,13 +163,10 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Override
     public void startPlacePicker() {
-        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-        try {
-            startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
-        } catch (GooglePlayServicesRepairableException e) {
-            e.printStackTrace();
-        } catch (GooglePlayServicesNotAvailableException e) {
-            e.printStackTrace();
-        }
+        List<Place.Field> fields = Arrays.asList(Place.Field.TYPES,Place.Field.ID);
+        Intent intent = new Autocomplete.IntentBuilder(
+                AutocompleteActivityMode.FULLSCREEN, fields)
+                .build(this);
+        startActivityForResult(intent, PLACE_PICKER_REQUEST);
     }
 }

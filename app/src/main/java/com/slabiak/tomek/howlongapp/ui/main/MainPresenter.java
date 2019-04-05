@@ -1,12 +1,13 @@
 package com.slabiak.tomek.howlongapp.ui.main;
 
+import com.google.android.libraries.places.api.model.Place;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.slabiak.tomek.howlongapp.data.AppDataManager;
 import com.slabiak.tomek.howlongapp.data.model.Restaurant;
 import com.slabiak.tomek.howlongapp.ui.base.BasePresenter;
 import com.slabiak.tomek.howlongapp.util.ErrorUtils;
 import com.slabiak.tomek.howlongapp.util.schedulers.BaseSchedulerProvider;
-import com.google.android.gms.location.places.Place;
+
 
 import java.util.List;
 
@@ -40,8 +41,8 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     @Override
     public void onPlacePickerFinished(Place place) {
         boolean isAnRestaurant = false;
-        for (int i : place.getPlaceTypes()) {
-            if (i == Place.TYPE_RESTAURANT) {
+        for (Place.Type t : place.getTypes()) {
+            if (t == Place.Type.RESTAURANT) {
                 isAnRestaurant = true;
                 break;
             }

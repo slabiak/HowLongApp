@@ -22,12 +22,6 @@
         <activity android:name="com.slabiak.tomek.howlongapp.ui.restaurantdetail.RestaurantDetailActivity" />
         <activity android:name="com.slabiak.tomek.howlongapp.ui.base.BaseActivity" />
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAKqGQIXcuZ4cXXiBrbOjD2Blz5SLYM5AQ" />
-        <meta-data android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
 
     </application>
 

@@ -1,8 +1,9 @@
 package com.slabiak.tomek.howlongapp.ui.main;
 
+import com.google.android.libraries.places.api.model.Place;
 import com.slabiak.tomek.howlongapp.data.model.Restaurant;
 import com.slabiak.tomek.howlongapp.ui.base.MvpView;
-import com.google.android.gms.location.places.Place;
+
 
 import java.util.List;
 

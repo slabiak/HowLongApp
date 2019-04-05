@@ -14,6 +14,9 @@ public class ErrorUtils {
             Response response = ((HttpException) e).response();
             try {
                 apiErrorResponse = new Gson().fromJson(response.errorBody().string(),ApiErrorResponse.class);
+                if(apiErrorResponse.getStatus()==409){
+                    return apiErrorResponse.getMessage();
+                }
                 return apiErrorResponse.toString();
             } catch (Exception exception) {
                 return exception.getMessage();
