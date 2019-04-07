@@ -22,6 +22,7 @@ git clone https://github.com/slabiak/HowLongApp.git
 **4. Choose release build**
 
 `release` - it uses deployed version of  [HowLong App REST API](https://github.com/slabiak/HowLongAppRestAPI) which is located [here](http://howlongapi.tslabiak.me)
+
 `build` - it uses local version of [HowLong App REST API](https://github.com/slabiak/HowLongAppRestAPI), you need to deploy it locally by yourself
 
 **5. Run the application**
